@@ -63,7 +63,10 @@ function NavBar() {
       <AppBar position=" static" sx={{ backgroundColor: "teal" }}>
         <Container maxWidth="xl">
           <Toolbar>
-           <Box> <Icon/></Box>
+            <Box>
+              {" "}
+              <Icon />
+            </Box>
             <Box
               sx={{
                 flexGrow: 1,
@@ -85,7 +88,7 @@ function NavBar() {
                 typography={theme}
                 sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
               >
-                 <MenuItem
+                <MenuItem
                   component={Link}
                   to="/login"
                   sx={{ color: "white", fontWeight: 600 }}
@@ -93,7 +96,7 @@ function NavBar() {
                   Login
                 </MenuItem>
               </Paper>
-              <Paper 
+              <Paper
                 typography={theme}
                 sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
               >
@@ -170,9 +173,9 @@ function LandingHero() {
           alignItems: "center",
           justifyContent: "space-between",
           gap: 5,
-          mx:5,
+          mx: 5,
           mt: 8,
-          maxHeight: "100vh"
+          maxHeight: "100vh",
         }}
       >
         <Box
@@ -212,7 +215,7 @@ function LandingHero() {
                 backgroundColor: "crimson",
                 fontWeight: 700,
                 fontFamily: "Open Sans",
-                letterSpacing:".1rem",
+                letterSpacing: ".1rem",
               }}
             >
               start wiring
@@ -224,7 +227,7 @@ function LandingHero() {
                 mt: 2,
                 border: "1px solid crimson",
                 fontWeight: 700,
-                letterSpacing:".2rem",
+                letterSpacing: ".2rem",
                 fontFamily: "Open Sans",
                 color: "crimson",
               }}
@@ -236,7 +239,13 @@ function LandingHero() {
         <Box
           component="img"
           src={HeroImage}
-          sx={{ width: { xs: "100%", md: "50%" }, border: "none", height:{xs:"auto" ,md:"450px"},objectFit:"cover", objectPosition:"bottom" }}
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            border: "none",
+            height: { xs: "auto", md: "450px" },
+            objectFit: "cover",
+            objectPosition: "bottom",
+          }}
         ></Box>
       </Box>
     </Box>
