@@ -253,7 +253,7 @@ function LandingHero() {
         <Box
           component="img"
           src={HeroImage}
-          sx={{ width: { xs: "100%", md: "50%" }, border: "none", height:{xs:"auto" ,md:"400px"},objectFit:"cover", objectPosition:"bottom" }}
+          sx={{ width: { xs: "100%", md: "50%" }, border: "none", height:{xs:"auto" ,md:"450px"},objectFit:"cover", objectPosition:"bottom" }}
         ></Box>
       </Box>
     </Box>
