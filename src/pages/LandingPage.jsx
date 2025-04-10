@@ -142,12 +142,12 @@ function LandingPage() {
     mx:3
    }}>
    
-   <Box sx={{width:"50%", display:"flex", flexDirection:"column", gap:3}} >
-    <Typography variant='h3' typography={theme}sx={{textTransform:"capitalize"}}>Share your Story with the world</Typography>
-    <Typography variant='subtitle'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, ab quas eligendi quaerat amet inventore aperiam debitis necessitatibus quo. Debitis dolores adipisci, omnis voluptatum explicabo magnam cum odit consectetur. Numquam.</Typography>
+   <Box sx={{width:"50%", display:"flex", flexDirection:"column", gap:4}} >
+    <Typography variant='h3' typography={theme}sx={{textTransform:"capitalize", fontWeight:"700", fontFamily:"Montserrat"}}>Share your Story with the world</Typography>
+    <Typography variant='subtitle' sx={{fontWeight:"600", fontFamily:"Open Sans"}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, ab quas eligendi quaerat amet inventore aperiam debitis necessitatibus quo. Debitis dolores adipisci, omnis voluptatum explicabo magnam cum odit consectetur. Numquam.</Typography>
     <Box sx={{display:"flex", gap:3}}>
-      <Button variant='contained' size='large' sx={{backgroundColor:"crimson", fontWeight:600}}>start wiring</Button>
-      <Button variant='outlined' size='large'sx={{border:"1px solid crimson" ,fontWeight:600, color:"crimson"}}>Explore Stories</Button>
+      <Button variant='contained' size='large' sx={{mt:2, backgroundColor:"crimson", fontWeight:600, fontFamily:"Open Sans"}}>start wiring</Button>
+      <Button variant='outlined' size='large'sx={{mt:2, border:"1px solid crimson" ,fontWeight:600, fontFamily:"Open Sans", color:"crimson"}}>Explore Stories</Button>
       </Box>
     </Box>
     <Box component={ImageList}>
