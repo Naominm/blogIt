@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import BgImage from "../assets/teal.jpg";
-
+import Icon from "../components/icon/Icon";
 function SignupPage() {
   return (
     <Box
@@ -33,13 +33,27 @@ function SignupPage() {
           top: 0,
           left: 0,
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          alignItems: "center",
         }}
       >
         <Box
           sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            my: 2,
+            mx: 2,
+            color: "white",
+          }}
+        >
+          {" "}
+          <Icon />
+        </Box>
+        <Box
+          sx={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
           <Typography
