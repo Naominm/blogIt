@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import BgImage from "../assets/teal.jpg";
 import Icon from "../components/icon/Icon";
-import { Link } from "react-router-dom";
 function SignupPage() {
   const [isSignup, setIsSignup] = useState(true);
   return (
@@ -78,36 +77,36 @@ function SignupPage() {
           </Box>
         </Box>
       </Box>
-      <Box component="form" sx={{ width: "40%", px: 2 }}>
-        <Paper
-          elevation={1}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            height: "100%",
-            mt: 3,
-          }}
-        >
-          <Box
-            mx={2}
-            my={2}
-            sx={{ fontSize: "1rem", fontFamily: "Montserrat" }}
-          >
-            <Icon />
-          </Box>
-          <Typography
-            variant="h5"
-            sx={{
-              textAlign: "center",
-              fontWeight: 700,
-              fontFamily: "Montserrat",
-              mb: 2,
-            }}
-          ></Typography>
 
-          {isSignup && (
-            <>
+      {isSignup && (
+        <>
+          <Box component="form" sx={{ width: "40%", px: 2 }}>
+            <Paper
+              elevation={1}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                height: "100%",
+                mt: 3,
+              }}
+            >
+              <Box
+                mx={2}
+                my={2}
+                sx={{ fontSize: "1rem", fontFamily: "Montserrat" }}
+              >
+                <Icon />
+              </Box>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center",
+                  fontWeight: 700,
+                  fontFamily: "Montserrat",
+                  mb: 2,
+                }}
+              ></Typography>
               <FormControl sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}>
                 <TextField
                   label="first Name"
@@ -178,38 +177,39 @@ function SignupPage() {
                   Create An Account
                 </Button>
               </FormControl>
-            </>
-          )}
-          <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
-            <Typography variant="subtitle">
-              <span>
-                {isSignup
-                  ? "Already Have an account"
-                  : "Do not have An account"}
-              </span>
-            </Typography>
-            <Box
-              sx={{ pl: 1, color: "blue", cursor: "pointer" }}
-              onClick={() => setIsSignup(!isSignup)}
-            >
-              {" "}
-              {isSignup ? "Login" : "Sign Up"}
-            </Box>{" "}
-          </Box>
-        </Paper>
-      </Box>
 
+              <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
+                <Typography variant="subtitle">
+                  Already have an account?
+                </Typography>
+                <Box
+                  sx={{ pl: 1, color: "blue", cursor: "pointer" }}
+                  onClick={() => setIsSignup(false)}
+                >
+                  Login
+                </Box>
+              </Box>
+            </Paper>
+          </Box>
+        </>
+      )}
       {!isSignup && (
         <>
           <Paper
             sx={{
               display: "flex",
               flexDirection: "column",
+              gap: "3rem",
               width: "50%",
-              height: "100%",
+              height: "80%",
+              mt: 5,
+              mx: 5,
             }}
           >
-            <FormControl sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}>
+            <Box sx={{ mx: 2, my: 2 }}>
+              <Icon />
+            </Box>
+            <FormControl sx={{ display: "flex", gap: "1.5rem", px: "5rem" }}>
               <TextField
                 label="UserName or Email"
                 type="text"
@@ -232,6 +232,17 @@ function SignupPage() {
               <Button variant="contained" sx={{ mt: 2 }}>
                 Login
               </Button>
+              <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
+                <Typography variant="subtitle">
+                  Do not Have An Account?
+                </Typography>
+                <Box
+                  sx={{ pl: 1, color: "blue", cursor: "pointer" }}
+                  onClick={() => setIsSignup(true)}
+                >
+                  Sign Up
+                </Box>
+              </Box>
             </FormControl>
           </Paper>
         </>
