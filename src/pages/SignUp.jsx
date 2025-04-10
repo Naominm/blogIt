@@ -104,9 +104,7 @@ function SignupPage() {
               fontFamily: "Montserrat",
               mb: 2,
             }}
-          >
-            S {isSignup ? "Sign Up" : "Login"}
-          </Typography>
+          ></Typography>
 
           {isSignup && (
             <>
@@ -183,7 +181,6 @@ function SignupPage() {
             </>
           )}
           <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
-            {" "}
             <Typography variant="subtitle">
               <span>
                 {isSignup
@@ -191,60 +188,52 @@ function SignupPage() {
                   : "Do not have An account"}
               </span>
             </Typography>
-            <Box sx={{ pl: 1 }}> {isSignup ? "Login" : "Sign Up"}</Box>{" "}
+            <Box
+              sx={{ pl: 1, color: "blue", cursor: "pointer" }}
+              onClick={() => setIsSignup(!isSignup)}
+            >
+              {" "}
+              {isSignup ? "Login" : "Sign Up"}
+            </Box>{" "}
           </Box>
         </Paper>
       </Box>
 
       {!isSignup && (
         <>
-          <Typography
-            variant="h5"
+          <Paper
             sx={{
-              textAlign: "center",
-              fontWeight: 700,
-              fontFamily: "Montserrat",
-              mb: 2,
+              display: "flex",
+              flexDirection: "column",
+              width: "50%",
+              height: "100%",
             }}
           >
-            Login
-          </Typography>
-          <FormControl sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}>
-            <TextField
-              label="UserName or Email"
-              type="text"
-              name="identifier"
-              required
-              fullWidth
-              size="small"
-              variant="outlined"
-            />
+            <FormControl sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}>
+              <TextField
+                label="UserName or Email"
+                type="text"
+                name="identifier"
+                required
+                fullWidth
+                size="small"
+                variant="outlined"
+              />
 
-            <TextField
-              label="password"
-              type="password"
-              name="password"
-              required
-              fullWidth
-              size="small"
-              variant="outlined"
-            />
-            <Button variant="contained" sx={{ mt: 2 }}>
-              Login
-            </Button>
-          </FormControl>
-          <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
-            <Typography variant="subtitle2">
-              Do not have an Account?{" "}
-            </Typography>
-            <Box
-              component="span"
-              onClick={() => setIsSignup(!isSignup)}
-              sx={{ pl: 1, color: "blue", cursor: "pointer" }}
-            >
-              {isSignup ? "Login" : "Sign Up"}
-            </Box>
-          </Box>
+              <TextField
+                label="password"
+                type="password"
+                name="password"
+                required
+                fullWidth
+                size="small"
+                variant="outlined"
+              />
+              <Button variant="contained" sx={{ mt: 2 }}>
+                Login
+              </Button>
+            </FormControl>
+          </Paper>
         </>
       )}
     </Box>
