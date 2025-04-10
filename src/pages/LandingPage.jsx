@@ -12,10 +12,10 @@ import {
   Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import BookIcon from "@mui/icons-material/Book";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import HeroImage from "../assets/teal.jpg";
+import Icon from "../components/icon/Icon";
 
 const theme = createTheme({
   typography: {
@@ -63,24 +63,7 @@ function NavBar() {
       <AppBar position=" static" sx={{ backgroundColor: "teal" }}>
         <Container maxWidth="xl">
           <Toolbar>
-            <BookIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
-              typography={theme}
-              variant="h5"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                letterSpacing: ".2rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              BlogIt
-            </Typography>
+           <Box> <Icon/></Box>
             <Box
               sx={{
                 flexGrow: 1,
@@ -104,7 +87,7 @@ function NavBar() {
               >
                  <MenuItem
                   component={Link}
-                  to="/"
+                  to="/login"
                   sx={{ color: "white", fontWeight: 600 }}
                 >
                   Login
@@ -116,7 +99,7 @@ function NavBar() {
               >
                 <MenuItem
                   component={Link}
-                  to="/"
+                  to="/signUp"
                   sx={{ color: "white", fontWeight: 600 }}
                 >
                   Sign Up
