@@ -8,6 +8,7 @@ import {
   Button,
   Alert,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import BgImage from "../assets/illustration.jpg";
@@ -23,7 +24,7 @@ function SignupPage() {
   const [formError, setFormError] = useState(null);
 
   const [isSignup, setIsSignup] = useState(true);
-
+  const navigate = useNavigate();
   const { isPending, mutate } = useMutation({
     mutationKey: ["register-user"],
     mutationFn: async () => {
@@ -34,10 +35,19 @@ function SignupPage() {
         emailAddress,
         password,
       });
-      console.log(response);
+      return response.data;
     },
-    // onSuccess:blank,
-    // onError:blank
+    onSuccess: () => {
+      setIsSignup(false);
+    },
+    onError: (err) => {
+      if (axios.isAxiosError(err)) {
+        const serverMessage = err.response.data.message;
+        setFormError(serverMessage);
+      } else {
+        setFormError("Something Went Wrong ");
+      }
+    },
   });
 
   function handleRegister(e) {
