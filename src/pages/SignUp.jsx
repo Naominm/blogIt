@@ -7,9 +7,17 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import BgImage from "../assets/teal.jpg";
+import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
+
 function SignupPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [isSignup, setIsSignup] = useState(true);
   return (
     <Box
@@ -35,7 +43,7 @@ function SignupPage() {
           sx={{
             height: "100%",
             width: "50%",
-            backgroundColor: "rgba(2, 50, 50, 0.8)",
+            backgroundColor: "rgba(6, 69, 57, 0.8)",
             zIndex: 5,
             position: "absolute",
             top: 0,
@@ -119,6 +127,8 @@ function SignupPage() {
                   size="small"
                   variant="outlined"
                   sx={{ fontSize: "1rem" }}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
                 <TextField
                   label="last Name"
@@ -128,6 +138,8 @@ function SignupPage() {
                   fullWidth
                   variant="outlined"
                   size="small"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
                 <TextField
                   label="email"
@@ -139,6 +151,8 @@ function SignupPage() {
                   fullWidth
                   size="small"
                   variant="outlined"
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
                 />
                 <TextField
                   label="user Name"
@@ -150,6 +164,8 @@ function SignupPage() {
                   fullWidth
                   size="small"
                   variant="outlined"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
                 <TextField
                   label="password"
@@ -161,6 +177,8 @@ function SignupPage() {
                   fullWidth
                   size="small"
                   variant="outlined"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <TextField
                   label="confirm Password"
@@ -172,8 +190,10 @@ function SignupPage() {
                   fullWidth
                   size="small"
                   variant="outlined"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <Button variant="contained" sx={{ mt: 2 }}>
+                <Button type="submit" variant="contained" sx={{ mt: 2 }}>
                   Create An Account
                 </Button>
               </FormControl>
@@ -211,7 +231,7 @@ function SignupPage() {
             </Box>
             <FormControl sx={{ display: "flex", gap: "1.5rem", px: "5rem" }}>
               <TextField
-                label="UserName or Email"
+                label=" Enter your UserName or Email"
                 type="text"
                 name="identifier"
                 required
@@ -221,7 +241,7 @@ function SignupPage() {
               />
 
               <TextField
-                label="password"
+                label="Enter your password"
                 type="password"
                 name="password"
                 required
