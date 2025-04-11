@@ -6,6 +6,7 @@ import {
   TextField,
   Paper,
   Button,
+  Alert,
 } from "@mui/material";
 import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
@@ -17,8 +18,19 @@ function SignupPage() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [formError, setFormError] = useState(null);
 
   const [isSignup, setIsSignup] = useState(true);
+
+  function handleRegister(e) {
+    e.preventDefault();
+    console.log("Form submitted!");
+    // console.log("formdata",{firstName,lastName,emailAddress,userName,password,confirmPassword})
+    if (password !== confirmPassword) {
+      setFormError("password and confirm password must match");
+      return;
+    }
+  }
   return (
     <Box
       sx={{
@@ -88,7 +100,7 @@ function SignupPage() {
 
       {isSignup && (
         <>
-          <Box component="form" sx={{ width: "40%", px: 2 }}>
+          <Box sx={{ width: "40%", px: 2 }}>
             <Paper
               elevation={1}
               sx={{
@@ -106,6 +118,7 @@ function SignupPage() {
               >
                 <Icon />
               </Box>
+
               <Typography
                 variant="h5"
                 sx={{
@@ -115,7 +128,16 @@ function SignupPage() {
                   mb: 2,
                 }}
               ></Typography>
-              <FormControl sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}>
+              {formError && (
+                <Alert severity="error" sx={{ mb: 2, mx: 2 }}>
+                  {formError}
+                </Alert>
+              )}
+              <FormControl
+                component="form"
+                onSubmit={handleRegister}
+                sx={{ display: "flex", gap: "0.8rem", px: "5rem" }}
+              >
                 <TextField
                   label="first Name"
                   type="first Name"
