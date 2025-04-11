@@ -8,6 +8,8 @@ import {
   Button,
   Alert,
 } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
 
@@ -22,14 +24,31 @@ function SignupPage() {
 
   const [isSignup, setIsSignup] = useState(true);
 
+  const { isPending, mutate } = useMutation({
+    mutationKey: ["register-user"],
+    mutationFn: async () => {
+      const response = await axios.post(`http://localhost:4000/auth/register`, {
+        firstName,
+        lastName,
+        userName,
+        emailAddress,
+        password,
+      });
+      console.log(response);
+    },
+    // onSuccess:blank,
+    // onError:blank
+  });
+
   function handleRegister(e) {
     e.preventDefault();
-    console.log("Form submitted!");
+    setFormError(null);
     // console.log("formdata",{firstName,lastName,emailAddress,userName,password,confirmPassword})
     if (password !== confirmPassword) {
       setFormError("password and confirm password must match");
       return;
     }
+    mutate();
   }
   return (
     <Box
@@ -215,8 +234,13 @@ function SignupPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                  Create An Account
+                <Button
+                  type="submit"
+                  disabled={isPending}
+                  variant="contained"
+                  sx={{ mt: 2 }}
+                >
+                  {isPending ? "please wait..." : "Create an Account"}
                 </Button>
               </FormControl>
 
