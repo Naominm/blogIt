@@ -90,7 +90,7 @@ function NavBar() {
               >
                 <MenuItem
                   component={Link}
-                  to="/login"
+                  to="/signUp"
                   sx={{ color: "white", fontWeight: 600 }}
                 >
                   Login
@@ -210,6 +210,8 @@ function LandingHero() {
             <Button
               variant="contained"
               size="large"
+              component={Link}
+              to="/signUp"
               sx={{
                 mt: 2,
                 backgroundColor: "crimson",
@@ -223,6 +225,8 @@ function LandingHero() {
             <Button
               variant="outlined"
               size="large"
+              component={Link}
+              to="/signUp"
               sx={{
                 mt: 2,
                 border: "1px solid crimson",
