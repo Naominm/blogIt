@@ -219,7 +219,6 @@ function SignupPage() {
               label="password"
               type="password"
               name="password"
-              autoComplete="password"
               autoFocus
               required
               fullWidth
@@ -230,9 +229,8 @@ function SignupPage() {
             />
             <TextField
               label="confirm Password"
-              type="confirm Password"
+              type="password"
               name="confirm Password"
-              autoComplete="confirm Password"
               autoFocus
               required
               fullWidth

@@ -26,7 +26,6 @@ function LoginPage() {
   function handleSubmit(e) {
     e.preventDefault();
     setFormError(null);
-    console.log({ identifier, password });
     if (!identifier || !password) {
       setFormError("All fields are required");
       return;
