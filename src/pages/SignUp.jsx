@@ -28,41 +28,67 @@ function SignupPage() {
   const setUserInformation = useUserStore((state) => state.setUserInformation);
 
   const navigate = useNavigate();
+  const [identifier, setIdentifier] = useState("");
 
   function handleSubmit(e) {
-    e.preventdefault();
-    setUserInformation({
-      firstName: "mary",
-      lastName: "thompson",
-      userName: claire,
-    });
-    navigate("/");
+    e.preventDefault();
+    setFormError(null);
+    console.log({ identifier, password });
+    if (!identifier || !password) {
+      setFormError("All fields are required");
+      return;
+    }
+    mutate();
   }
 
   const { isPending, mutate } = useMutation({
-    mutationKey: ["register-user"],
+    mutationKey: ["login-user"],
     mutationFn: async () => {
-      const response = await axios.post(`http://localhost:4000/auth/register`, {
-        firstName,
-        lastName,
-        userName,
-        emailAddress,
-        password,
-      });
+      const response = await axios.post(
+        `http://localhost:4000/auth/login`,
+        { identifier, password },
+        { withCredentials: true },
+      );
       return response.data;
     },
-    onSuccess: () => {
-      setIsSignup(false);
+    onSuccess: (data) => {
+      setUserInformation(data);
+      navigate("/blogs");
     },
-    onError: (err) => {
-      if (axios.isAxiosError(err)) {
-        const serverMessage = err.response.data.message;
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        const serverMessage = error.response.data.message;
         setFormError(serverMessage);
       } else {
-        setFormError("Something Went Wrong ");
+        setFormError("something went wrong");
       }
     },
   });
+
+  // const {isPending,mutate } = useMutation({
+  //   mutationKey: ["register-user"],
+  //   mutationFn: async () => {
+  //     const response = await axios.post(`http://localhost:4000/auth/register`, {
+  //       firstName,
+  //       lastName,
+  //       userName,
+  //       emailAddress,
+  //       password,
+  //     });
+  //     return response.data;
+  //   },
+  //   onSuccess: () => {
+  //     setIsSignup(false);
+  //   },
+  //   onError: (err) => {
+  //     if (axios.isAxiosError(err)) {
+  //       const serverMessage = err.response.data.message;
+  //       setFormError(serverMessage);
+  //     } else {
+  //       setFormError("Something Went Wrong ");
+  //     }
+  //   },
+  // });
 
   function handleRegister(e) {
     e.preventDefault();
@@ -299,6 +325,11 @@ function SignupPage() {
             <Box sx={{ mx: 2, my: 2 }}>
               <Icon />
             </Box>
+            {formError && (
+              <Alert severity="error" sx={{ mb: 2, mx: 2 }}>
+                {formError}
+              </Alert>
+            )}
             <FormControl
               component="form"
               onSubmit={handleSubmit}
@@ -308,6 +339,8 @@ function SignupPage() {
                 label=" Enter your UserName or Email"
                 type="text"
                 name="identifier"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 required
                 fullWidth
                 size="small"
@@ -318,13 +351,20 @@ function SignupPage() {
                 label="Enter your password"
                 type="password"
                 name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 fullWidth
                 size="small"
                 variant="outlined"
               />
-              <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                Login
+              <Button
+                type="submit"
+                disabled={isPending}
+                variant="contained"
+                sx={{ mt: 2 }}
+              >
+                {isPending ? "please wait" : "Login"}
               </Button>
               <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
                 <Typography variant="subtitle">
