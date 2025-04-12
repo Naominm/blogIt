@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import useUserStore from "../../store/userStore";
 import axios from "axios";
 import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
@@ -24,7 +25,20 @@ function SignupPage() {
   const [formError, setFormError] = useState(null);
 
   const [isSignup, setIsSignup] = useState(true);
+  const setUserInformation = useUserStore((state) => state.setUserInformation);
+
   const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventdefault();
+    setUserInformation({
+      firstName: "mary",
+      lastName: "thompson",
+      userName: claire,
+    });
+    navigate("/");
+  }
+
   const { isPending, mutate } = useMutation({
     mutationKey: ["register-user"],
     mutationFn: async () => {
@@ -285,7 +299,11 @@ function SignupPage() {
             <Box sx={{ mx: 2, my: 2 }}>
               <Icon />
             </Box>
-            <FormControl sx={{ display: "flex", gap: "1.5rem", px: "5rem" }}>
+            <FormControl
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{ display: "flex", gap: "1.5rem", px: "5rem" }}
+            >
               <TextField
                 label=" Enter your UserName or Email"
                 type="text"
@@ -305,7 +323,7 @@ function SignupPage() {
                 size="small"
                 variant="outlined"
               />
-              <Button variant="contained" sx={{ mt: 2 }}>
+              <Button type="submit" variant="contained" sx={{ mt: 2 }}>
                 Login
               </Button>
               <Box sx={{ mt: 2, mb: 3, textAlign: "center" }}>
