@@ -1,51 +1,150 @@
-import { AppBar, Toolbar, Button, Box, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Container,
+  MenuItem,
+  Menu,
+  Paper,
+} from "@mui/material";
+import { useState } from "react";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import useUserStore from "../../store/userStore";
-
+import Icon from "../components/icon/Icon";
 function NavBar() {
-  const user = useUserStore((state) => state.user);
-  const removedUser = useUserStore((state) => state.removeUserInformation);
-  function handleLogout() {
-    removeUserInformation();
-  }
-  if (!user) {
-    return (
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            component={Link}
-            to="/"
-            sx={{ flexGrow: 1, textDecoration: "none", color: "#fff" }}
-          >
-            BlogIt
-          </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <Button
-              component={Link}
-              to="/login"
-              color="inherit"
-              size="large"
-              sx={{ textTransform: "none" }}
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const theme = createTheme({
+    typography: {
+      fontFamily: '"Roboto", sans-serif',
+      h1: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+      h2: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+      h3: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+      h4: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+      h5: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+      h6: {
+        fontFamily: '"Montserrat", sans-serif',
+      },
+    },
+  });
+  return (
+    <ThemeProvider theme={theme}>
+      <AppBar position=" static" sx={{ backgroundColor: "teal" }}>
+        <Container maxWidth="xl">
+          <Toolbar>
+            <Box>
+              {" "}
+              <Icon />
+            </Box>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  justifyContent: "right",
+                  gap: "2rem",
+                },
+              }}
             >
-              Login
-            </Button>
-            <Button
-              component={Link}
-              to="/sign Up"
-              color="inherit"
-              size="large"
-              sx={{ textTransform: "none" }}
-            >
-              sign up
-            </Button>
-          </Box>
-        </Toolbar>
+              <MenuItem component={Link} to="/" sx={{ color: "white" }}>
+                About
+              </MenuItem>
+              <MenuItem component={Link} to="/" sx={{ color: "white" }}>
+                Account
+              </MenuItem>
+              <Paper
+                typography={theme}
+                sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/signUp"
+                  sx={{ color: "white", fontWeight: 600 }}
+                >
+                  Login
+                </MenuItem>
+              </Paper>
+              <Paper
+                typography={theme}
+                sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/signUp"
+                  sx={{ color: "white", fontWeight: 600 }}
+                >
+                  Sign Up
+                </MenuItem>
+              </Paper>
+            </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none " } }}>
+              <IconButton
+                size="large"
+                aria-label="Account of the current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                onClick={handleMenuOpen}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+                PaperProps={{
+                  sx: {
+                    backgroundColor: "white",
+                    color: "black",
+                  },
+                }}
+              >
+                <MenuItem component={Link} to="/" sx={{ color: "black" }}>
+                  About
+                </MenuItem>
+                <MenuItem component={Link} to="/" sx={{ color: "black" }}>
+                  Account
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
-    );
-  } else {
-    return <AppBar></AppBar>;
-  }
-
-  <Button component={Link} to="/new" color="inherit" size></Button>;
+    </ThemeProvider>
+  );
 }
+
+export default NavBar;
