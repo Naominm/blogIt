@@ -14,7 +14,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import Icon from "../components/icon/Icon";
-function NavBar() {
+function NavBar({
+  menuItems = [],
+  buttons = [],
+  icon: IconComponent,
+  extraComponents,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const handleMenuOpen = (event) => {
@@ -66,36 +71,20 @@ function NavBar() {
                 },
               }}
             >
-              <MenuItem component={Link} to="/" sx={{ color: "white" }}>
-                About
-              </MenuItem>
-              <MenuItem component={Link} to="/" sx={{ color: "white" }}>
-                Account
-              </MenuItem>
-              <Paper
-                typography={theme}
-                sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
-              >
-                <MenuItem
-                  component={Link}
-                  to="/signUp"
-                  sx={{ color: "white", fontWeight: 600 }}
-                >
-                  Login
-                </MenuItem>
-              </Paper>
-              <Paper
-                typography={theme}
-                sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}
-              >
-                <MenuItem
-                  component={Link}
-                  to="/signUp"
-                  sx={{ color: "white", fontWeight: 600 }}
-                >
-                  Sign Up
-                </MenuItem>
-              </Paper>
+              {menuItems.length > 0 ? (
+                menuItems.map((item) => (
+                  <MenuItem
+                    component={Link}
+                    to={item.path}
+                    sx={{ color: "white" }}
+                    key={item.label}
+                  >
+                    {item.label}
+                  </MenuItem>
+                ))
+              ) : (
+                <></>
+              )}
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none " } }}>
               <IconButton
@@ -140,6 +129,18 @@ function NavBar() {
                 </MenuItem>
               </Menu>
             </Box>
+            {extraComponents && (
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  gap: "1rem",
+                  marginLeft: "1rem",
+                }}
+              >
+                {extraComponents}
+              </Box>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

@@ -4,6 +4,7 @@ import HeroImage from "../assets/teal.jpg";
 import NavBar from "../components/NavBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import DefaultMenuLinks from "../components/DefaultNav";
 
 const theme = createTheme({
   typography: {
@@ -32,7 +33,7 @@ const theme = createTheme({
 function LandingPage() {
   return (
     <div className="landingPage">
-      <NavBar />
+      <NavBar extraComponents={DefaultMenuLinks} />
       <LandingHero />
     </div>
   );
