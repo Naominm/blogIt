@@ -28,6 +28,7 @@ function MyProfilePage() {
       />
       <Box>
         <ProfileInfoCard />
+        <PersonalInfoSec />
       </Box>
     </Box>
   );
@@ -55,6 +56,33 @@ function ProfileInfoCard() {
       </Grid>
       <Button variant="contained" sx={{ mt: 3 }}>
         Save Profile Info
+      </Button>
+    </Paper>
+  );
+}
+
+function PersonalInfoSec() {
+  return (
+    <Paper sx={{ p: 3, mb: 4 }}>
+      <Typography variant="h6" mb={2}>
+        Personal Info
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="First Name" required></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Last Name" required></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Email" required></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Username" required></TextField>
+        </Grid>
+      </Grid>
+      <Button variant="contained" sx={{ mt: 3 }}>
+        Save PErsonal Info
       </Button>
     </Paper>
   );
