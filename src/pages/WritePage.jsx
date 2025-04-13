@@ -1,5 +1,5 @@
 import {
-  Typography,
+  TextField,
   Avatar,
   Box,
   Paper,
@@ -44,11 +44,19 @@ function WritersForm() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          gap: "2rem",
         }}
       >
         <Paper
           component="form"
-          sx={{ width: { xs: "100%", md: "50%" }, height: "100%", mt: 5 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: { xs: "100%", md: "50%" },
+            height: "100%",
+            mt: 5,
+          }}
         >
           <Box
             sx={{
@@ -61,7 +69,6 @@ function WritersForm() {
             }}
           >
             <Button variant="contained">
-              {" "}
               <CloudUploadIcon />
             </Button>
             <IconButton
@@ -76,6 +83,14 @@ function WritersForm() {
               <CloseIcon />
             </IconButton>
           </Box>
+          <TextField fullWidth placeholder="Enter Your title" />
+          <TextField
+            label="Blog Content"
+            multiline
+            rows={6}
+            variant="outlined"
+            fullWidth
+          />
         </Paper>
       </Box>
     </>
