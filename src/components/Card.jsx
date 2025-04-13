@@ -9,6 +9,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import { red } from "@mui/material/colors";
 
@@ -22,8 +23,14 @@ export default function BlogCard({
   onClick,
   edit,
   remove,
+  onEditClick,
+  onRemoveClick,
   isMyBlogPage = false,
 }) {
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate("/edit-blogs");
+  };
   return (
     <Card component="div" sx={{}}>
       <Box>
@@ -110,7 +117,9 @@ export default function BlogCard({
             mb: 2,
           }}
         >
-          <Button variant="contained">{edit}</Button>
+          <Button variant="contained" onClick={handleEditClick}>
+            {edit}
+          </Button>
           <Button variant="contained" sx={{ backgroundColor: "crimson" }}>
             {remove}
           </Button>

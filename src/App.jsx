@@ -7,6 +7,7 @@ import LoginPage from "./pages/Login";
 import WritersPage from "./pages/WritePage";
 import ArticlesPage from "./pages/ArticlePage";
 import MyBlogsPage from "./pages/MyBlogs";
+import EditBlogPAge from "./pages/EditBlogPage";
 function App() {
   return (
     <>
@@ -44,6 +45,14 @@ function App() {
             element={
               <Protected>
                 <MyBlogsPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/edit-blogs"
+            element={
+              <Protected>
+                <EditBlogPAge />
               </Protected>
             }
           />

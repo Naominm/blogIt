@@ -1,9 +1,12 @@
-import { Typography, Avatar, Box, Paper, Button } from "@mui/material";
+import { Avatar, Box, Paper, Button } from "@mui/material";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
 
 function MyBlogsPage() {
   return (
@@ -40,6 +43,7 @@ function MyBlogsPage() {
             featuredImage={featuredImage}
             remove="Delete"
             edit="Edit"
+            onEditClick={() => navigate("/edit-blogs")}
             isMyBlogPage={true}
           />
           <Box
