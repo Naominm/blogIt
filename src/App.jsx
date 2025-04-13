@@ -5,6 +5,7 @@ import BlogListing from "./pages/BlogListing";
 import Protected from "./components/protected";
 import LoginPage from "./pages/Login";
 import WritersPage from "./pages/WritePage";
+import ArticlesPage from "./pages/ArticlePage";
 function App() {
   return (
     <>
@@ -26,6 +27,14 @@ function App() {
             element={
               <Protected>
                 <WritersPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/articles"
+            element={
+              <Protected>
+                <ArticlesPage />
               </Protected>
             }
           />
