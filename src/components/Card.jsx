@@ -40,8 +40,8 @@ export default function BlogCard({
           }
           title={authorName ? authorName : "Unknown Author"}
         />
-        <Box sx={{ Width: "100%", height: "100%", display: "flex" }}>
-          <Box sx={{ display: "flex", mx: 2 }}>
+        <Box sx={{ Width: "100%", height: "100%", display: "flex", mx: 2 }}>
+          <Box sx={{ display: "flex" }}>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography
                 gutterBottom
@@ -68,7 +68,9 @@ export default function BlogCard({
           </Box>
         </Box>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mx: 10 }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "space-between", mx: 10, mt: 3 }}
+      >
         <CardActions sx={{ display: "flex" }}>
           <div
             style={{
@@ -83,7 +85,6 @@ export default function BlogCard({
           </div>
         </CardActions>
         <Box>
-          {" "}
           <Button
             size="small"
             color="primary"

@@ -11,7 +11,8 @@ function BlogListing() {
       <NavBar
         icon={Icon}
         menuItems={[
-          { label: "Write", path: "/write" },
+          { label: "listing", path: "/explore" },
+          { label: "Write", path: "/writers" },
           { label: "My Blogs", path: "/my-blogs" },
           { label: "My Profile", path: "/profile" },
         ]}

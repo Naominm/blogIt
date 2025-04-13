@@ -4,6 +4,7 @@ import SignupPage from "./pages/SignUp";
 import BlogListing from "./pages/BlogListing";
 import Protected from "./components/protected";
 import LoginPage from "./pages/Login";
+import WritersPage from "./pages/WritePage";
 function App() {
   return (
     <>
@@ -13,10 +14,18 @@ function App() {
           <Route path="/signUp" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/blogs"
+            path="/explore"
             element={
               <Protected>
                 <BlogListing />
+              </Protected>
+            }
+          />
+          <Route
+            path="/writers"
+            element={
+              <Protected>
+                <WritersPage />
               </Protected>
             }
           />
