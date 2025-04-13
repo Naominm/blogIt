@@ -1,13 +1,27 @@
-import { Typography, Card, Paper, Box } from "@mui/material";
+import { Typography, Paper, Box, Avatar } from "@mui/material";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import NavBar from "../components/NavBar";
 import ArticleCard from "../components/ArticleCard";
+import Icon from "../components/icon/Icon";
 
 function ArticlesPage() {
   return (
     <>
-      <NavBar />
+      <NavBar
+        icon={Icon}
+        menuItems={[
+          { label: "listing", path: "/explore" },
+          { label: "Write", path: "/writers" },
+          { label: "My Blogs", path: "/my-blogs" },
+          { label: "My Profile", path: "/profile" },
+        ]}
+        extraComponents={
+          <>
+            <Avatar alt="Naomi" src="/avatar.png" />
+          </>
+        }
+      />
       <ArticlesContent />
     </>
   );

@@ -6,6 +6,7 @@ import Protected from "./components/protected";
 import LoginPage from "./pages/Login";
 import WritersPage from "./pages/WritePage";
 import ArticlesPage from "./pages/ArticlePage";
+import MyBlogsPage from "./pages/MyBlogs";
 function App() {
   return (
     <>
@@ -35,6 +36,14 @@ function App() {
             element={
               <Protected>
                 <ArticlesPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/my-blogs"
+            element={
+              <Protected>
+                <MyBlogsPage />
               </Protected>
             }
           />
