@@ -6,9 +6,8 @@ import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
 function MyBlogsPage() {
+  const navigate = useNavigate();
   return (
     <>
       <NavBar
