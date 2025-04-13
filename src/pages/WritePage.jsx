@@ -87,7 +87,7 @@ function WritersForm() {
           <TextField
             fullWidth
             label="Enter Your title"
-            sx={{ backgroundColor: "#F3F5F7" }}
+            sx={{ backgroundColor: "#F6F8FA" }}
           />
           <TextField
             label="Blog Content"
@@ -95,7 +95,7 @@ function WritersForm() {
             rows={8}
             variant="outlined"
             fullWidth
-            sx={{ backgroundColor: "#F3F5F7" }}
+            sx={{ backgroundColor: "#F6F8FA" }}
           />
           <Button variant="contained" sx={{ my: 1, mx: 1 }}>
             submit
