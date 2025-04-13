@@ -1,4 +1,14 @@
-import { Typography, Avatar, Box, Paper } from "@mui/material";
+import {
+  Typography,
+  Avatar,
+  Box,
+  Paper,
+  Button,
+  IconButton,
+} from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import CloseIcon from "@mui/icons-material/Close";
+
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
 function WritersPage() {
@@ -36,10 +46,36 @@ function WritersForm() {
           alignItems: "center",
         }}
       >
-        <Paper component="form" sx={{ width: "50%", height: "100%", mt: 5 }}>
-          <Typography textAlign="center" sx={{ my: 2 }}>
-            No this is actually the form
-          </Typography>
+        <Paper
+          component="form"
+          sx={{ width: { xs: "100%", md: "50%" }, height: "100%", mt: 5 }}
+        >
+          <Box
+            sx={{
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "30%",
+              backgroundColor: "#F6F8FA",
+            }}
+          >
+            <Button variant="contained">
+              {" "}
+              <CloudUploadIcon />
+            </Button>
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                bgcolor: "white",
+                color: "black",
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
         </Paper>
       </Box>
     </>
