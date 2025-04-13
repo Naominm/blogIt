@@ -29,6 +29,7 @@ function MyProfilePage() {
       <Box>
         <ProfileInfoCard />
         <PersonalInfoSec />
+        <UpdatePasswordSection />
       </Box>
     </Box>
   );
@@ -88,4 +89,40 @@ function PersonalInfoSec() {
   );
 }
 
+function UpdatePasswordSection() {
+  return (
+    <Paper sx={{ p: 3 }}>
+      <Typography variant="h6" mb={2}>
+        Update password
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            type="password"
+            label="Enter your current password"
+          ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            type="password"
+            label="Enter your New password"
+          ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            type="password"
+            label="Confirm New Password"
+          ></TextField>
+        </Grid>
+      </Grid>
+      <Button variant="contained" sx={{ mt: 3 }}>
+        {" "}
+        Update Password
+      </Button>
+    </Paper>
+  );
+}
 export default MyProfilePage;
