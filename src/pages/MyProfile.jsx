@@ -41,6 +41,16 @@ function ProfileInfoCard() {
       <Typography variant="h6" mb={2}>
         Profile Info
       </Typography>
+      <Box
+        component="form"
+        sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
+      >
+        <Avatar src="" alt="profile" sx={{ width: 80, height: 80 }} />
+        <Button variant="outlined" component="label">
+          upload Photo
+          <input hidden accept="" type="file"></input>
+        </Button>
+      </Box>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField fullWidth label="Phone Number"></TextField>
