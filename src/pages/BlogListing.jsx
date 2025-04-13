@@ -27,10 +27,11 @@ function BlogListing() {
 
 function BlogsHero() {
   return (
-    <>
+    <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
       <Box
+        component="div"
         sx={{
-          width: "100%",
+          width: "70%",
           height: "100%",
           display: "flex",
           alignItems: "center",
@@ -48,7 +49,11 @@ function BlogsHero() {
           onClick={() => navigate("/blog/getting-started-with-react")}
         />
       </Box>
-    </>
+      <Box
+        component="div"
+        sx={{ backgroundColor: "#999", width: "30%", mt: 10 }}
+      ></Box>
+    </Box>
   );
 }
 
