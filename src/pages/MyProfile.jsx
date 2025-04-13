@@ -1,7 +1,14 @@
-import { Avatar } from "@mui/material";
+import {
+  Avatar,
+  Paper,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+  Box,
+} from "@mui/material";
 import Icon from "../components/icon/Icon";
 import NavBar from "../components/NavBar";
-import { Box, Typography } from "@mui/material";
 function MyProfilePage() {
   return (
     <Box component="div">
@@ -19,8 +26,37 @@ function MyProfilePage() {
           </>
         }
       />
-      <Typography variant="h6"> Welcome to your profile</Typography>
+      <Box>
+        <ProfileInfoCard />
+      </Box>
     </Box>
+  );
+}
+
+function ProfileInfoCard() {
+  return (
+    <Paper sx={{ p: 3, mb: 4 }}>
+      <Typography variant="h6" mb={2}>
+        Profile Info
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Phone Number"></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Occupation"></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Bio"></TextField>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField fullWidth label="Secondary Email"></TextField>
+        </Grid>
+      </Grid>
+      <Button variant="contained" sx={{ mt: 3 }}>
+        Save Profile Info
+      </Button>
+    </Paper>
   );
 }
 
