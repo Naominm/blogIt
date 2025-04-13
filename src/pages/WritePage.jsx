@@ -1,4 +1,4 @@
-import { Typography, Avatar, Box } from "@mui/material";
+import { Typography, Avatar, Box, Paper } from "@mui/material";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
 function WritersPage() {
@@ -18,7 +18,6 @@ function WritersPage() {
           </>
         }
       />
-      <Typography variant="h6">This is the writers page</Typography>
       <Box component="div">
         <WritersForm />
       </Box>
@@ -29,7 +28,20 @@ function WritersPage() {
 function WritersForm() {
   return (
     <>
-      <Typography variant="h6">The form goes here</Typography>
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Paper component="form" sx={{ width: "50%", height: "100%", mt: 5 }}>
+          <Typography textAlign="center" sx={{ my: 2 }}>
+            No this is actually the form
+          </Typography>
+        </Paper>
+      </Box>
     </>
   );
 }
