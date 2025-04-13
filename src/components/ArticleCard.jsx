@@ -1,4 +1,4 @@
-import { CardHeader, CardMedia, Avatar, Box } from "@mui/material";
+import { CardHeader, CardMedia, Avatar, Box, Typography } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { red } from "@mui/material/colors";
 
@@ -8,6 +8,7 @@ export default function ArticleCard({
   authorName,
   updatedDate,
   onClick,
+  excerpt,
 }) {
   return (
     <Box component="div" sx={{}}>
@@ -48,6 +49,11 @@ export default function ArticleCard({
           onClick={onClick}
           sx={{ cursor: "pointer", objectPosition: "top" }}
         />
+      </Box>
+      <Box component="div" sx={{ mt: 2 }}>
+        <Typography variant="body2" color="text.secondary" fontSize="1rem">
+          {excerpt}
+        </Typography>
       </Box>
     </Box>
   );

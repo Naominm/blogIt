@@ -36,7 +36,10 @@ function ArticlesContent() {
         <Box component="div" sx={{ width: { xs: "100%", md: "60%" } }}>
           <ArticleCard
             title="Getting Started with React"
-            excerpt="Learn the basics of React components and state management in this blog."
+            excerpt="Learn the basics of React components and state management in this blog. Learn the basics of React components and state management in this blog.
+            Learn the basics of React components and state management in this blog.
+            Learn the basics of React components and state management in this blog.
+            Learn the basics of React components and state management in this blog."
             featuredImage={featuredImage}
             authorAvatar={AvatarImage}
             authorName="JohnSmith"
