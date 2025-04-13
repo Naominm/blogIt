@@ -8,6 +8,7 @@ import WritersPage from "./pages/WritePage";
 import ArticlesPage from "./pages/ArticlePage";
 import MyBlogsPage from "./pages/MyBlogs";
 import EditBlogPAge from "./pages/EditBlogPage";
+import MyProfilePage from "./pages/MyProfile";
 function App() {
   return (
     <>
@@ -53,6 +54,14 @@ function App() {
             element={
               <Protected>
                 <EditBlogPAge />
+              </Protected>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <MyProfilePage />
               </Protected>
             }
           />
