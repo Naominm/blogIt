@@ -1,6 +1,9 @@
-import { Typography, Avatar } from "@mui/material";
+import { Typography, Avatar, Box, Paper, Button } from "@mui/material";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
+import BlogCard from "../components/Card";
+import featuredImage from "../assets/heroh1.jpg";
+import AvatarImage from "../assets/blog.png";
 
 function MyBlogsPage() {
   return (
@@ -19,12 +22,20 @@ function MyBlogsPage() {
           </>
         }
       />
-      <Typography variant="h6">All the blogs that you have authored</Typography>
+      <Paper sx={{ display: "flex", justifyContent: "center" }}>
+        <Box component="div" sx={{ mt: 5, width: "70%" }}>
+          <BlogCard
+            title="Blog 1 Title"
+            excerpt=" React components and state management in this blog.  React components and state management in this blog. React components and state management in this blog"
+            updatedDate="4/13/2025"
+            authorAvatar={AvatarImage}
+            authorName="Naomi Njeri"
+            featuredImage={featuredImage}
+          />
+        </Box>
+      </Paper>
     </>
   );
 }
 
-function myBlogCard() {
-  return <></>;
-}
 export default MyBlogsPage;
