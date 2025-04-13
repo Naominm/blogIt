@@ -55,7 +55,8 @@ function WritersForm() {
             gap: 2,
             width: { xs: "100%", md: "50%" },
             height: "100%",
-            mt: 5,
+            mt: 3,
+            pb: 2,
           }}
         >
           <Box
@@ -64,7 +65,7 @@ function WritersForm() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "30%",
+              height: "40%",
               backgroundColor: "#F6F8FA",
             }}
           >
@@ -83,14 +84,21 @@ function WritersForm() {
               <CloseIcon />
             </IconButton>
           </Box>
-          <TextField fullWidth placeholder="Enter Your title" />
+          <TextField
+            fullWidth
+            label="Enter Your title"
+            sx={{ border: "none" }}
+          />
           <TextField
             label="Blog Content"
             multiline
-            rows={6}
+            rows={8}
             variant="outlined"
             fullWidth
           />
+          <Button variant="contained" sx={{ my: 1, mx: 1 }}>
+            submit
+          </Button>
         </Paper>
       </Box>
     </>
