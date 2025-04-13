@@ -1,9 +1,10 @@
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, Paper, Typography } from "@mui/material";
 import Icon from "../components/icon/Icon";
 import NavBar from "../components/NavBar";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
+import FeaturedBlogs from "../components/TrendingBlogs";
 function BlogListing() {
   return (
     <>
@@ -31,7 +32,7 @@ function BlogsHero() {
       <Box
         component="div"
         sx={{
-          width: "70%",
+          width: { xs: "100%", md: "70%" },
           height: "100%",
           display: "flex",
           alignItems: "center",
@@ -49,10 +50,35 @@ function BlogsHero() {
           onClick={() => navigate("/blog/getting-started-with-react")}
         />
       </Box>
-      <Box
-        component="div"
-        sx={{ backgroundColor: "#999", width: "30%", mt: 10 }}
-      ></Box>
+      <Paper
+        sx={{
+          mt: 10,
+          px: 5,
+          display: { xs: "none", md: "flex" },
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        <Typography variant="h6" sx={{ my: 1 }}>
+          Trending Blogs
+        </Typography>
+        <Box component="div" sx={{ width: "100%" }}>
+          <FeaturedBlogs
+            title="Getting Started with Blogs"
+            authorAvatar={AvatarImage}
+            authorName="JohnSmith"
+            updatedDate="2023-11-20"
+          />
+        </Box>
+        <Box component="div" sx={{ width: "100%" }}>
+          <FeaturedBlogs
+            title="Getting Started with Blogs"
+            authorAvatar={AvatarImage}
+            authorName="JohnSmith"
+            updatedDate="2023-11-20"
+          />
+        </Box>
+      </Paper>
     </Box>
   );
 }
