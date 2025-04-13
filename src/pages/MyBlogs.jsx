@@ -22,7 +22,14 @@ function MyBlogsPage() {
           </>
         }
       />
-      <Paper sx={{ display: "flex", justifyContent: "center" }}>
+      <Paper
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "#F6F8FA",
+          minHeight: "100vh",
+        }}
+      >
         <Box component="div" sx={{ mt: 5, width: "70%" }}>
           <BlogCard
             title="Blog 1 Title"
@@ -31,7 +38,16 @@ function MyBlogsPage() {
             authorAvatar={AvatarImage}
             authorName="Naomi Njeri"
             featuredImage={featuredImage}
+            remove="Delete"
+            edit="Edit"
+            isMyBlogPage={true}
           />
+          <Box
+            component="div"
+            display="flex"
+            gap="2rem"
+            justifyContent="space-around"
+          ></Box>
         </Box>
       </Paper>
     </>

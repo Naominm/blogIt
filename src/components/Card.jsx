@@ -20,6 +20,9 @@ export default function BlogCard({
   authorName,
   updatedDate,
   onClick,
+  edit,
+  remove,
+  isMyBlogPage = false,
 }) {
   return (
     <Card component="div" sx={{}}>
@@ -96,6 +99,23 @@ export default function BlogCard({
           </Button>
         </Box>
       </Box>
+      {isMyBlogPage && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            gap: 15,
+            mx: 5,
+            my: 2,
+            mb: 2,
+          }}
+        >
+          <Button variant="contained">{edit}</Button>
+          <Button variant="contained" sx={{ backgroundColor: "crimson" }}>
+            {remove}
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 }
