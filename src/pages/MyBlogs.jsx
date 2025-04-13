@@ -24,4 +24,7 @@ function MyBlogsPage() {
   );
 }
 
+function myBlogCard() {
+  return <></>;
+}
 export default MyBlogsPage;
