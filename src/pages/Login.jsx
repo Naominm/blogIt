@@ -14,6 +14,7 @@ import useUserStore from "../../store/userStore";
 import axios from "axios";
 import BgImage from "../assets/teal.jpg";
 import Icon from "../components/icon/Icon";
+import apiUrl from "../../utills/apiUrl";
 
 function LoginPage() {
   const [formError, setFormError] = useState(null);
@@ -37,7 +38,7 @@ function LoginPage() {
     mutationKey: ["login-user"],
     mutationFn: async () => {
       const response = await axios.post(
-        `http://localhost:4000/auth/login`,
+        `${apiUrl}/auth/login`,
         { identifier, password },
         { withCredentials: true },
       );
