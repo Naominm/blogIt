@@ -33,7 +33,7 @@ function SignupPage() {
         lastName,
         userName,
         emailAddress,
-        password,
+        password
       });
       return response.data;
     },
