@@ -91,7 +91,7 @@ function LandingHero() {
               variant="contained"
               size="large"
               component={Link}
-              to="/signUp"
+              to="/auth/login"
               sx={{
                 mt: 2,
                 backgroundColor: "crimson",
@@ -106,7 +106,7 @@ function LandingHero() {
               variant="outlined"
               size="large"
               component={Link}
-              to="/signUp"
+              to="/auth/register"
               sx={{
                 mt: 2,
                 border: "1px solid crimson",
