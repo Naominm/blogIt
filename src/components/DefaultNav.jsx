@@ -12,7 +12,7 @@ const DefaultMenuLinks = (
     <Paper sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}>
       <MenuItem
         component={Link}
-        to="/signUp"
+        to="/auth/login"
         sx={{ color: "white", fontWeight: 600 }}
       >
         Login
@@ -21,7 +21,7 @@ const DefaultMenuLinks = (
     <Paper sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}>
       <MenuItem
         component={Link}
-        to="/signUp"
+        to="/auth/register"
         sx={{ color: "white", fontWeight: 600 }}
       >
         Sign Up
