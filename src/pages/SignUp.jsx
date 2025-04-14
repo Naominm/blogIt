@@ -13,7 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
-import apiUrl from "../utils/apiUrl";
+import apiUrl from "../utils/apiUrl.js";
 
 function SignupPage() {
   const [firstName, setFirstName] = useState("");

@@ -14,7 +14,7 @@ import useUserStore from "../../store/userStore";
 import axios from "axios";
 import BgImage from "../assets/teal.jpg";
 import Icon from "../components/icon/Icon";
-import apiUrl from "../../utills/apiUrl";
+import apiUrl from "../utils/apiUrl.js";
 
 function LoginPage() {
   const [formError, setFormError] = useState(null);
