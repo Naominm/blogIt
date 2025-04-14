@@ -184,7 +184,7 @@ function LoginPage() {
             <Typography variant="subtitle">Do not Have An Account?</Typography>
             <Box
               sx={{ pl: 1, color: "blue", cursor: "pointer" }}
-              onClick={() => navigate("/signUp")}
+              onClick={() => navigate("/auth/register")}
             >
               Sign Up
             </Box>

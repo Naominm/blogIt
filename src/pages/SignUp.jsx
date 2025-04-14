@@ -38,7 +38,7 @@ function SignupPage() {
       return response.data;
     },
     onSuccess: () => {
-      navigate("/login");
+      navigate("/auth/login");
     },
     onError: (err) => {
       if (axios.isAxiosError(err)) {
@@ -254,7 +254,7 @@ function SignupPage() {
             <Typography variant="subtitle">Already have an account?</Typography>
             <Box
               sx={{ pl: 1, color: "blue", cursor: "pointer" }}
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/auth/login")}
             >
               Login
             </Box>
