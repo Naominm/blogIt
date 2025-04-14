@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import BgImage from "../assets/illustration.jpg";
 import Icon from "../components/icon/Icon";
+import apiUrl from "../utils/apiUrl";
 
 function SignupPage() {
   const [firstName, setFirstName] = useState("");
@@ -27,7 +28,7 @@ function SignupPage() {
   const { isPending, mutate } = useMutation({
     mutationKey: ["register-user"],
     mutationFn: async () => {
-      const response = await axios.post(`http://localhost:4000/auth/register`, {
+      const response = await axios.post(`${apiUrl}/auth/register`, {
         firstName,
         lastName,
         userName,
