@@ -18,7 +18,7 @@ function App() {
           <Route path="/auth/register" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route
-            path="/explore"
+            path="/blogs"
             element={
               <Protected>
                 <BlogListing />
