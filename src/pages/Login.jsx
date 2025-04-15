@@ -38,7 +38,8 @@ function LoginPage() {
     mutationKey: ["login-user"],
     mutationFn: async () => {
       const response = await axios.post(
-        `${apiUrl}/auth/login`,
+        // `${apiUrl}/auth/login`,
+        `http://localhost:4000/auth/login`,
         { identifier, password },
         { withCredentials: true },
       );

@@ -29,7 +29,7 @@ export default function BlogCard({
 }) {
   const navigate = useNavigate();
   const handleEditClick = () => {
-    navigate("/edit-blogs");
+    navigate("/edit/:blogId");
   };
   return (
     <Card component="div" sx={{}}>
@@ -99,7 +99,7 @@ export default function BlogCard({
           <Button
             size="small"
             color="primary"
-            onClick={onClick}
+            onClick={() => navigate("/articles")} 
             sx={{ ml: "auto", color: "crimson", fontWeight: 700 }}
           >
             Read Full Blog
