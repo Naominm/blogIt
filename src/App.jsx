@@ -50,7 +50,7 @@ function App() {
             }
           />
           <Route
-            path="/edit-blogs"
+            path="/edit/:blogId"
             element={
               <Protected>
                 <EditBlogPAge />

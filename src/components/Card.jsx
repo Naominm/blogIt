@@ -31,6 +31,7 @@ export default function BlogCard({
   const handleEditClick = () => {
     navigate("/edit/:blogId");
   };
+
   return (
     <Card component="div" sx={{}}>
       <Box>
@@ -50,7 +51,15 @@ export default function BlogCard({
           }
           title={authorName ? authorName : "Unknown Author"}
         />
-        <Box sx={{ Width: "100%", height: "100%", display: "flex", mx: 2 }}>
+        <Box
+          sx={{
+            Width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            mx: 4,
+          }}
+        >
           <Box sx={{ display: "flex" }}>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography
@@ -69,7 +78,8 @@ export default function BlogCard({
           <Box>
             <CardMedia
               component="img"
-              height="150"
+              height="160"
+              width="50%"
               image={featuredImage || ""}
               alt={title}
               onClick={onClick}
@@ -95,11 +105,10 @@ export default function BlogCard({
           </div>
         </CardActions>
         <Box>
-          {" "}
           <Button
             size="small"
             color="primary"
-            onClick={() => navigate("/articles")} 
+            onClick={() => navigate("/articles")}
             sx={{ ml: "auto", color: "crimson", fontWeight: 700 }}
           >
             Read Full Blog
@@ -117,10 +126,14 @@ export default function BlogCard({
             mb: 2,
           }}
         >
-          <Button variant="contained" onClick={handleEditClick}>
+          <Button variant="contained" onClick={onEditClick}>
             {edit}
           </Button>
-          <Button variant="contained" sx={{ backgroundColor: "crimson" }}>
+          <Button
+            variant="contained"
+            onClick={onRemoveClick}
+            sx={{ backgroundColor: "crimson" }}
+          >
             {remove}
           </Button>
         </Box>

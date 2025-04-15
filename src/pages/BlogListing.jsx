@@ -5,7 +5,9 @@ import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import FeaturedBlogs from "../components/TrendingBlogs";
+import { useLogout } from "../components/logout";
 function BlogListing() {
+  const logout = useLogout();
   return (
     <>
       <NavBar
@@ -18,6 +20,12 @@ function BlogListing() {
         ]}
         extraComponents={
           <>
+            <button
+              onClick={logout}
+              style={{ fontWeight: "bold", color: "crimson", padding: 5 }}
+            >
+              Logout
+            </button>
             <Avatar alt="Naomi" src="/avatar.png" />
           </>
         }

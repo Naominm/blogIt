@@ -1,37 +1,103 @@
-import { Avatar, Box, Paper, Button, CircularProgress, Typography } from "@mui/material";
-import {useQuery} from "@tanstack/react-query"
-import axios from "axios"
-import ReactMarkdown from "react-markdown"
+import {
+  Avatar,
+  Box,
+  Paper,
+  Button,
+  CircularProgress,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
-import {useNavigate, useParams } from "react-router-dom";
-
-
-
+import apiUrl from "../utils/apiUrl";
 
 function MyBlogsPage() {
   const navigate = useNavigate();
-   const { blogId } = useParams();
-   console.log(blogId)
-  const{isLoading,data,error}=useQuery({
-    queryKey:["get-blog" ,blogId],
-    queryFn:async ()=>{
-   const response=await  axios.get(`http://localhost:4000/blogs/${blogId}`,{withCredentials:true})
-  return response.data
-  }
-  })
-  console.log("BlogBata", data)
+  const [myBlogs, setMyBlogs] = useState([]);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedBlogId, setSelectedBlogId] = useState(null);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
-  if (isLoading){
-    return(
-      <Box mt={1} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <CircularProgress size={100}></CircularProgress>
-    </Box>
-    )
-  }
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["my-blogs"],
+    queryFn: async () => {
+      // const response = await axios.get("http://localhost:4000/blogs", {
+      const response = await axios.get(`${apiUrl}/blogs`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    if (data) setMyBlogs(data);
+  }, [data]);
+
+  const openDeleteDialog = (blogId) => {
+    setSelectedBlogId(blogId);
+    setDeleteDialogOpen(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+    setSelectedBlogId(null);
+  };
+
+  const handleDelete = async () => {
+    if (!selectedBlogId) return;
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/blogs/${blogId}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      setSnackbar({
+        open: true,
+        message: response.data.message || "Blog deleted successfully",
+        severity: "success",
+      });
+
+      setMyBlogs((prevBlogs) =>
+        prevBlogs.filter((blog) => blog._id !== selectedBlogId),
+      );
+    } catch (error) {
+      console.error("[handleDelete] Error:", error);
+      setSnackbar({
+        open: true,
+        message: error.response?.data?.message || "Failed to delete the blog",
+        severity: "error",
+      });
+    } finally {
+      closeDeleteDialog();
+    }
+  };
+
   return (
     <>
       <NavBar
@@ -42,12 +108,9 @@ function MyBlogsPage() {
           { label: "My Blogs", path: "/blogs/:blogId" },
           { label: "My Profile", path: "/profile" },
         ]}
-        extraComponents={
-          <>
-            <Avatar alt="Naomi" src="/avatar.png" />
-          </>
-        }
+        extraComponents={<Avatar alt="Naomi" src="/avatar.png" />}
       />
+
       <Paper
         sx={{
           display: "flex",
@@ -56,28 +119,77 @@ function MyBlogsPage() {
           minHeight: "100vh",
         }}
       >
-        <Box component="div" sx={{ mt: 5, width: "70%" }}>
-          <BlogCard
-            title={data.title}
-            excerpt={data.excerpt}
-            updatedDate={new Date(data.updatedAt).toLocaleDateString()}
-            authorAvatar={AvatarImage}
-            authorName={`${data.author?.firstName} ${data.author?.lastName}`}
-            content={data.content}
-            featuredImage={featuredImage}
-            remove="Delete"
-            edit="Edit"
-            onEditClick={() => navigate("/edit-blogs")}
-            isMyBlogPage={true}
-          />
-          <Box
-            component="div"
-            display="flex"
-            gap="2rem"
-            justifyContent="space-around"
-          ></Box>
+        <Box
+          sx={{
+            mt: 5,
+            width: "70%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          {isLoading ? (
+            <Box mt={1} display="flex" justifyContent="center">
+              <CircularProgress size={100} />
+            </Box>
+          ) : error ? (
+            <Typography color="error">
+              Error loading blogs: {error.message}
+            </Typography>
+          ) : myBlogs.length === 0 ? (
+            <Typography variant="h6">No blogs found</Typography>
+          ) : (
+            myBlogs.map((blog) => (
+              <BlogCard
+                key={blog._id}
+                blogId={blog._id}
+                title={blog.title}
+                excerpt={blog.excerpt}
+                updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
+                authorAvatar={AvatarImage}
+                authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
+                content={blog.content}
+                featuredImage={featuredImage}
+                remove="Delete"
+                edit="Edit"
+                onEditClick={() => navigate(`/edit/${blog._id}`)}
+                onRemoveClick={() => openDeleteDialog(blog._id)}
+                onClick={() => navigate(`/articles/${blog._id}`)}
+                isMyBlogPage={true}
+              />
+            ))
+          )}
         </Box>
       </Paper>
+
+      <Dialog open={deleteDialogOpen} onClose={closeDeleteDialog}>
+        <DialogTitle>Delete Blog</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this blog?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="error">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={snackbar.open}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert
+          severity={snackbar.severity}
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

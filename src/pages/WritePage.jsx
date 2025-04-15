@@ -10,7 +10,6 @@ import {
   Avatar,
 } from "@mui/material";
 function WritersPage() {
-  
   return (
     <>
       <NavBar
