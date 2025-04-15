@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import apiUrl from "../utils/apiUrl";
 
 export default function WritersForm({
   initialTitle,
@@ -27,7 +28,7 @@ export default function WritersForm({
   const { isPending, mutate } = useMutation({
     mutationFn: async () => {
       const response = await axios.post(
-        "http://localhost:4000/blogs",
+        `${apiUrl}/blogs`,
         { title, excerpt, content },
         { withCredentials: true },
       );
