@@ -46,7 +46,7 @@ function LoginPage() {
     },
     onSuccess: (data) => {
       setUserInformation(data);
-      navigate("/explore");
+      navigate("/blogs");
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
