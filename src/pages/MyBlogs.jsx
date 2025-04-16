@@ -160,7 +160,10 @@ function MyBlogsPage() {
                   console.log("navigating to edit blog page" , blog.id);
                   navigate(`/edit/${blog.id}`)}}
                 onRemoveClick={() => openDeleteDialog(blog.id)}
-                onClick={() => navigate(`/articles/${blog.id}`)}
+                onClick={() => {
+                  console.log("Blog object:", blog);
+                  navigate(`/articles/${blog.id}`);
+                }}
                 isMyBlogPage={true}
               />
             ))

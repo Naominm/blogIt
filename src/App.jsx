@@ -34,7 +34,7 @@ function App() {
             }
           />
           <Route
-            path="/articles"
+            path="/articles/:blogId"
             element={
               <Protected>
                 <ArticlesPage />

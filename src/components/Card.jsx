@@ -33,7 +33,7 @@ export default function BlogCard({
   };
 
   return (
-    <Card component="div" sx={{}}>
+    <Card component="div">
       <Box>
         <CardHeader
           avatar={
@@ -61,7 +61,7 @@ export default function BlogCard({
           }}
         >
           <Box sx={{ display: "flex" }}>
-            <CardContent sx={{ flexGrow: 1 }}>
+            <CardContent sx={{cursor:"pointer", flexGrow: 1 }}  onClick={onClick}>
               <Typography
                 gutterBottom
                 variant="h4"
@@ -108,7 +108,7 @@ export default function BlogCard({
           <Button
             size="small"
             color="primary"
-            onClick={() => navigate("/articles")}
+            onClick={onClick}
             sx={{ ml: "auto", color: "crimson", fontWeight: 700 }}
           >
             Read Full Blog
