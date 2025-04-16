@@ -32,7 +32,9 @@ export default function WritersForm({
         { title, excerpt, content },
         { withCredentials: true },
       );
+      console.log("hello", apiUrl);
       return response.data;
+     
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
@@ -70,7 +72,7 @@ export default function WritersForm({
         }}
       >
         {formError && (
-          <Alert severity="error" sx={{ mb: 2, mx: 2 }}>
+          <Alert severity="error" sx={{ mb: 1, mx: 2 }}>
             {formError}
           </Alert>
         )}

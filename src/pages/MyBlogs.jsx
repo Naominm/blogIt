@@ -50,6 +50,7 @@ function MyBlogsPage() {
   });
 
   useEffect(() => {
+    console.log("fetched blogs data" ,data)
     if (data) setMyBlogs(data);
   }, [data]);
 
@@ -68,7 +69,7 @@ function MyBlogsPage() {
 
     try {
       const response = await axios.delete(
-        `http://localhost:4000/blogs/${blogId}`,
+        `${apiUrl}/${blogId}`,
         {
           withCredentials: true,
           headers: {
@@ -152,9 +153,12 @@ function MyBlogsPage() {
                 featuredImage={featuredImage}
                 remove="Delete"
                 edit="Edit"
-                onEditClick={() => navigate(`/edit/${blog._id}`)}
-                onRemoveClick={() => openDeleteDialog(blog._id)}
-                onClick={() => navigate(`/articles/${blog._id}`)}
+                onEditClick={() => {
+                  console.log("found blog object",blog)
+                  console.log("navigating to edit blog page" , blog.id);
+                  navigate(`/edit/${blog.id}`)}}
+                onRemoveClick={() => openDeleteDialog(blog.id)}
+                onClick={() => navigate(`/articles/${blog.id}`)}
                 isMyBlogPage={true}
               />
             ))

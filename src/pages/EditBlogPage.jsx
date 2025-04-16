@@ -18,7 +18,7 @@ function EditBlogPAge() {
   } = useQuery({
     queryKey: ["get-blog", blogId],
     queryFn: async () => {
-      const response = await axios.patch(`${apiUrl}/blogs/${blogId}`, {
+      const response = await axios.get(`${apiUrl}/blogs/${blogId}`, {
         withCredentials: true,
       });
       return response.data;
