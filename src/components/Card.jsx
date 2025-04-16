@@ -56,6 +56,7 @@ export default function BlogCard({
             Width: "100%",
             height: "100%",
             display: "flex",
+            flexDirection: { xs: "column", md: "flex" },
             justifyContent: "space-between",
             mx: 4,
           }}
@@ -65,6 +66,17 @@ export default function BlogCard({
               sx={{ cursor: "pointer", flexGrow: 1 }}
               onClick={onClick}
             >
+              <Box>
+                <CardMedia
+                  component="img"
+                  height="160"
+                  width="50%"
+                  image={featuredImage || ""}
+                  alt={title}
+                  onClick={onClick}
+                  sx={{ cursor: "pointer", objectPosition: "top" }}
+                />
+              </Box>
               <Typography
                 gutterBottom
                 variant="h4"
@@ -77,17 +89,6 @@ export default function BlogCard({
                 {excerpt}
               </Typography>
             </CardContent>
-          </Box>
-          <Box>
-            <CardMedia
-              component="img"
-              height="160"
-              width="50%"
-              image={featuredImage || ""}
-              alt={title}
-              onClick={onClick}
-              sx={{ cursor: "pointer", objectPosition: "top" }}
-            />
           </Box>
         </Box>
       </Box>
