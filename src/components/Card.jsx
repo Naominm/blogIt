@@ -61,7 +61,10 @@ export default function BlogCard({
           }}
         >
           <Box sx={{ display: "flex" }}>
-            <CardContent sx={{cursor:"pointer", flexGrow: 1 }}  onClick={onClick}>
+            <CardContent
+              sx={{ cursor: "pointer", flexGrow: 1 }}
+              onClick={onClick}
+            >
               <Typography
                 gutterBottom
                 variant="h4"

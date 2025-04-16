@@ -19,7 +19,7 @@ export default function FeaturedBlogs({
   return (
     <Card
       component="div"
-      sx={{ Width: "100%", height: "100%", display: "flex" }}
+      sx={{ width: "100%", height: "100%", display: "flex" }}
     >
       <Box>
         <CardHeader

@@ -21,7 +21,7 @@ export default function WritersForm({
   blogId,
   isEdit = false,
   onSubmit,
-  loading = false, 
+  loading = false,
 }) {
   const [title, setTitle] = useState(initialTitle || "");
   const [excerpt, setExcerpt] = useState(initialExcerpt || "");
@@ -31,21 +31,21 @@ export default function WritersForm({
 
   const { isPending, mutate } = useMutation({
     mutationFn: async () => {
-        if (isEdit && blogId) {
-          const response = await axios.put(
-            `${apiUrl}/blogs/${blogId}`,
-            { title, excerpt, content },
-            { withCredentials: true }
-          );
-          return response.data;
-        } else {
-          const response = await axios.post(
-            `${apiUrl}/blogs`,
-            { title, excerpt, content },
-            { withCredentials: true }
-          );
-          return response.data;
-        }
+      if (isEdit && blogId) {
+        const response = await axios.put(
+          `${apiUrl}/blogs/${blogId}`,
+          { title, excerpt, content },
+          { withCredentials: true },
+        );
+        return response.data;
+      } else {
+        const response = await axios.post(
+          `${apiUrl}/blogs`,
+          { title, excerpt, content },
+          { withCredentials: true },
+        );
+        return response.data;
+      }
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

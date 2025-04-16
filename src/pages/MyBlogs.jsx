@@ -41,9 +41,9 @@ function MyBlogsPage() {
     queryFn: async () => {
       // const response = await axios.get("http://localhost:4000/blogs", {
       const response = await axios.get(`${apiUrl}/blogs`, {
-      withCredentials: true,
-      headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       return response.data;
@@ -52,18 +52,16 @@ function MyBlogsPage() {
 
   useEffect(() => {
     if (data) {
-    const activeBlogs = data.filter((blog) => !blog.isDeleted); 
-    setMyBlogs(activeBlogs);
+      const activeBlogs = data.filter((blog) => !blog.isDeleted);
+      setMyBlogs(activeBlogs);
     }
   }, [data]);
-  
 
   const openDeleteDialog = (blogId) => {
-    console.log("Opening delete dialog for blog ID:", blogId); 
+    console.log("Opening delete dialog for blog ID:", blogId);
     setSelectedBlogId(blogId);
     setDeleteDialogOpen(true);
   };
-  
 
   const closeDeleteDialog = () => {
     setDeleteDialogOpen(false);
@@ -72,7 +70,7 @@ function MyBlogsPage() {
 
   const handleDelete = async () => {
     if (!selectedBlogId) return;
-  
+
     try {
       const response = await axios.delete(`${apiUrl}/blogs/${selectedBlogId}`, {
         withCredentials: true,
@@ -80,13 +78,13 @@ function MyBlogsPage() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       setSnackbar({
         open: true,
         message: response.data.message || "Blog deleted successfully",
         severity: "success",
       });
-  
+
       queryClient.invalidateQueries(["my-blogs"]);
     } catch (error) {
       console.error("[handleDelete] Error:", error);
@@ -99,7 +97,6 @@ function MyBlogsPage() {
       closeDeleteDialog();
     }
   };
-  
 
   return (
     <>
@@ -156,9 +153,10 @@ function MyBlogsPage() {
                 remove="Delete"
                 edit="Edit"
                 onEditClick={() => {
-                  console.log("found blog object",blog)
-                  console.log("navigating to edit blog page" , blog.id);
-                  navigate(`/edit/${blog.id}`)}}
+                  console.log("found blog object", blog);
+                  console.log("navigating to edit blog page", blog.id);
+                  navigate(`/edit/${blog.id}`);
+                }}
                 onRemoveClick={() => openDeleteDialog(blog.id)}
                 onClick={() => {
                   console.log("Blog object:", blog);

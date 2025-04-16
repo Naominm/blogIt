@@ -1,4 +1,14 @@
-import { Avatar, Box, Paper, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Paper,
+  Typography,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Icon from "../components/icon/Icon";
 import NavBar from "../components/NavBar";
 import BlogCard from "../components/Card";
@@ -6,8 +16,26 @@ import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import FeaturedBlogs from "../components/TrendingBlogs";
 import { useLogout } from "../components/logout";
+import apiUrl from "../utils/apiUrl";
+
 function BlogListing() {
   const logout = useLogout();
+  const navigate = useNavigate();
+
+  const {
+    isLoading,
+    data: blogs,
+    error,
+  } = useQuery({
+    queryKey: ["all-blogs"],
+    queryFn: async () => {
+      const response = await axios.get(`${apiUrl}/blogs`, {
+        withCredentials: true,
+      });
+      return response.data;
+    },
+  });
+
   return (
     <>
       <NavBar
@@ -30,12 +58,14 @@ function BlogListing() {
           </>
         }
       />
-      <BlogsHero />
+      <BlogsHero blogs={blogs} isLoading={isLoading} error={error} />
     </>
   );
 }
 
-function BlogsHero() {
+function BlogsHero({ blogs, isLoading, error }) {
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
       <Box
@@ -44,20 +74,36 @@ function BlogsHero() {
           width: { xs: "100%", md: "70%" },
           height: "100%",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           mt: 10,
+          gap: 3,
+          px: 2,
         }}
       >
-        <BlogCard
-          title="Getting Started with React"
-          excerpt="Learn the basics of React components and state management in this blog."
-          featuredImage={featuredImage}
-          authorAvatar={AvatarImage}
-          authorName="JohnSmith"
-          updatedDate="2023-11-20"
-          onClick={() => navigate("/blog/getting-started-with-react")}
-        />
+        {isLoading ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Alert severity="error">Error loading blogs: {error.message}</Alert>
+        ) : blogs && blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <BlogCard
+              key={blog._id}
+              title={blog.title}
+              excerpt={blog.excerpt}
+              featuredImage={featuredImage}
+              authorAvatar={AvatarImage}
+              authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
+              updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
+              onClick={() => navigate(`/articles/${blog._id}`)}
+            />
+          ))
+        ) : (
+          <Typography variant="h6">No blogs found</Typography>
+        )}
       </Box>
       <Paper
         sx={{
@@ -68,25 +114,12 @@ function BlogsHero() {
           gap: 2,
         }}
       >
-        <Typography variant="h6" sx={{ my: 1 }}>
-          Trending Blogs
+        <Typography
+          variant="subtitle soon"
+          sx={{ my: 1, color: "teal", display: { xs: "none", md: "flex" } }}
+        >
+          Trending Blogs will appear here soon..
         </Typography>
-        <Box component="div" sx={{ width: "100%" }}>
-          <FeaturedBlogs
-            title="Getting Started with Blogs"
-            authorAvatar={AvatarImage}
-            authorName="JohnSmith"
-            updatedDate="2023-11-20"
-          />
-        </Box>
-        <Box component="div" sx={{ width: "100%" }}>
-          <FeaturedBlogs
-            title="Getting Started with Blogs"
-            authorAvatar={AvatarImage}
-            authorName="JohnSmith"
-            updatedDate="2023-11-20"
-          />
-        </Box>
       </Paper>
     </Box>
   );

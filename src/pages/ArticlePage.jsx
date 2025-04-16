@@ -9,12 +9,14 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrl from "../utils/apiUrl";
 
-
-
 function ArticlesPage() {
   const { blogId } = useParams();
   console.log("Navigating to blog ID:", blogId);
-  const { isLoading, error, data: blog } = useQuery({
+  const {
+    isLoading,
+    error,
+    data: blog,
+  } = useQuery({
     queryKey: ["blog", blogId],
     queryFn: async () => {
       const response = await axios.get(`${apiUrl}/blogs/${blogId}`, {
@@ -23,13 +25,12 @@ function ArticlesPage() {
       return response.data;
     },
   });
-  
+
   if (isLoading) return <Typography>Loading...</Typography>;
-  if (error) return <Typography>Error loading blog: {error.message}</Typography>;
+  if (error)
+    return <Typography>Error loading blog: {error.message}</Typography>;
   if (!blog) return <Typography>Blog not found.</Typography>;
 
-
-  
   return (
     <>
       <NavBar
@@ -52,7 +53,7 @@ function ArticlesPage() {
   );
 }
 
-function ArticlesContent({blog}) {
+function ArticlesContent({ blog }) {
   return (
     <>
       <Box
@@ -69,7 +70,7 @@ function ArticlesContent({blog}) {
       >
         <Paper elevation={0} sx={{ mt: 5, width: "60%", height: "100%" }}>
           <Typography variant="h3" sx={{ fontWeight: 700 }}>
-           {blog.title}
+            {blog.title}
           </Typography>
         </Paper>
         <Box component="div" sx={{ width: { xs: "100%", md: "60%" } }}>
