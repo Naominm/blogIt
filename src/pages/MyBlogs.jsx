@@ -13,7 +13,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -25,6 +25,7 @@ import AvatarImage from "../assets/blog.png";
 import apiUrl from "../utils/apiUrl";
 
 function MyBlogsPage() {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [myBlogs, setMyBlogs] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -40,9 +41,9 @@ function MyBlogsPage() {
     queryFn: async () => {
       // const response = await axios.get("http://localhost:4000/blogs", {
       const response = await axios.get(`${apiUrl}/blogs`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      withCredentials: true,
+      headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       return response.data;
@@ -50,14 +51,19 @@ function MyBlogsPage() {
   });
 
   useEffect(() => {
-    console.log("fetched blogs data" ,data)
-    if (data) setMyBlogs(data);
+    if (data) {
+    const activeBlogs = data.filter((blog) => !blog.isDeleted); 
+    setMyBlogs(activeBlogs);
+    }
   }, [data]);
+  
 
   const openDeleteDialog = (blogId) => {
+    console.log("Opening delete dialog for blog ID:", blogId); 
     setSelectedBlogId(blogId);
     setDeleteDialogOpen(true);
   };
+  
 
   const closeDeleteDialog = () => {
     setDeleteDialogOpen(false);
@@ -66,27 +72,22 @@ function MyBlogsPage() {
 
   const handleDelete = async () => {
     if (!selectedBlogId) return;
-
+  
     try {
-      const response = await axios.delete(
-        `${apiUrl}/${blogId}`,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+      const response = await axios.delete(`${apiUrl}/blogs/${selectedBlogId}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      );
-
+      });
+  
       setSnackbar({
         open: true,
         message: response.data.message || "Blog deleted successfully",
         severity: "success",
       });
-
-      setMyBlogs((prevBlogs) =>
-        prevBlogs.filter((blog) => blog._id !== selectedBlogId),
-      );
+  
+      queryClient.invalidateQueries(["my-blogs"]);
     } catch (error) {
       console.error("[handleDelete] Error:", error);
       setSnackbar({
@@ -98,6 +99,7 @@ function MyBlogsPage() {
       closeDeleteDialog();
     }
   };
+  
 
   return (
     <>

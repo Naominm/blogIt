@@ -1,5 +1,4 @@
 import { Avatar } from "@mui/material";
-import AvatarImage from "../assets/blog.png";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
 import WritersForm from "../components/WritersCard";
@@ -9,11 +8,11 @@ import { useParams } from "react-router-dom";
 import apiUrl from "../utils/apiUrl";
 
 function EditBlogPAge() {
+  const navigate = useNavigate();
   const { blogId } = useParams();
 
   const {
     isLoading,
-    error,
     data: blog,
   } = useQuery({
     queryKey: ["get-blog", blogId],
@@ -24,6 +23,26 @@ function EditBlogPAge() {
       return response.data;
     },
   });
+
+  useMutation({
+    mutationFn: async () => {
+      const response = await axios.patch(`${apiUrl}/blogs/${blogId}`, {
+        title,
+        excerpt,
+        content,
+      }, {
+        withCredentials: true,
+      });
+  
+      console.log("Updated Blog Response:", response.data); 
+      return response.data;
+    },
+    onSuccess: (updatedBlog) => {
+      console.log("Successfully updated blog:", updatedBlog);
+      navigate(`/blogs/${blogId}`); 
+    },
+  });
+  
 
   return (
     <>
