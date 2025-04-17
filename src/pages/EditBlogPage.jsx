@@ -49,6 +49,9 @@ function EditPage() {
             initialTitle={blog.title}
             initialExcerpt={blog.excerpt}
             initialContent={blog.content}
+            initialImageUrl={blog.imageUrl}
+            blogId={blog.id}
+            isEdit={true}
           />
         ) : (
           <p>Error loading blog data.</p>

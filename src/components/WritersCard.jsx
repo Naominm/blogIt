@@ -10,7 +10,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrl from "../utils/apiUrl";
 
@@ -18,6 +18,7 @@ export default function WritersForm({
   initialTitle,
   initialExcerpt,
   initialContent,
+  initialImageUrl,
   blogId,
   isEdit = false,
   onSubmit,
@@ -28,8 +29,11 @@ export default function WritersForm({
   const [content, setContent] = useState(initialContent || "");
   const [formError, setFormError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(
+    initialImageUrl || null,
+  );
   const [previewUrl, setPreviewUrl] = useState(null);
+  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
   const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
@@ -41,7 +45,7 @@ export default function WritersForm({
         title,
         excerpt,
         content,
-        imageUrl: uploadedImageUrl,
+        imageUrl: uploadedImageUrl ?? initialImageUrl,
       };
       if (isEdit && blogId) {
         const response = await axios.patch(
@@ -66,9 +70,8 @@ export default function WritersForm({
       }
     },
     onSuccess: (data) => {
-      console.log("onsucess", data);
-      console.log("Navigating to blog:", data.id);
-      navigate(`/blogs/${data.blog.id}`);
+      const blogIdToNavigate = isEdit ? data.id : data.blog.id;
+      navigate(`/blogs/${blogIdToNavigate}`);
     },
   });
 

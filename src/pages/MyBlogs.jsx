@@ -141,8 +141,8 @@ function MyBlogsPage() {
           ) : (
             myBlogs.map((blog) => (
               <BlogCard
-                key={blog._id}
-                blogId={blog._id}
+                key={blog.id}
+                blogId={blog.id}
                 title={blog.title}
                 excerpt={blog.excerpt}
                 updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
