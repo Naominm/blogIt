@@ -77,7 +77,7 @@ function ArticlesContent({ blog }) {
           <ArticleCard
             title={blog.title}
             excerpt={blog.excerpt}
-            featuredImage={featuredImage}
+            featuredImage={blog.imageUrl}
             authorAvatar={AvatarImage}
             authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
             updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
