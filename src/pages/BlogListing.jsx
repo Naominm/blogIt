@@ -98,7 +98,7 @@ function BlogsHero({ blogs, isLoading, error }) {
               authorAvatar={AvatarImage}
               authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
               updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
-              onClick={() => navigate(`/articles/${blog._id}`)}
+              onClick={() => navigate(`/articles/${blog.id}`)}
             />
           ))
         ) : (

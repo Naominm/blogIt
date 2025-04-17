@@ -1,4 +1,4 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import AvatarImage from "../assets/blog.png";
 import NavBar from "../components/NavBar";
 import Icon from "../components/icon/Icon";
@@ -8,7 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import apiUrl from "../utils/apiUrl";
 
-function EditBlogPage() {
+function EditPage() {
   const { blogId } = useParams();
 
   const {
@@ -41,19 +41,21 @@ function EditBlogPage() {
           </>
         }
       />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : blog ? (
-        <WritersForm
-          initialTitle={blog.title}
-          initialExcerpt={blog.excerpt}
-          initialContent={blog.content}
-        />
-      ) : (
-        <p>Error loading blog data.</p>
-      )}
+      <Box sx>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : blog ? (
+          <WritersForm
+            initialTitle={blog.title}
+            initialExcerpt={blog.excerpt}
+            initialContent={blog.content}
+          />
+        ) : (
+          <p>Error loading blog data.</p>
+        )}
+      </Box>
     </>
   );
 }
 
-export default EditBlogPage;
+export default EditPage;

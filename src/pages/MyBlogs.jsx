@@ -149,7 +149,7 @@ function MyBlogsPage() {
                 authorAvatar={AvatarImage}
                 authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
                 content={blog.content}
-                featuredImage={featuredImage}
+                featuredImage={blog.imageUrl || featuredImage}
                 remove="Delete"
                 edit="Edit"
                 onEditClick={() => {

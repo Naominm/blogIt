@@ -56,38 +56,54 @@ export default function BlogCard({
             Width: "100%",
             height: "100%",
             display: "flex",
-            flexDirection: { xs: "column", md: "flex" },
             justifyContent: "space-between",
             mx: 4,
           }}
         >
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <CardContent
-              sx={{ cursor: "pointer", flexGrow: 1 }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+                flexGrow: 1,
+              }}
               onClick={onClick}
             >
-              <Box>
+              <Box
+                display="flex"
+                sx={{
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "40%",
+                }}
+              >
                 <CardMedia
                   component="img"
-                  height="160"
-                  width="50%"
+                  height="200"
+                  width="30%"
                   image={featuredImage || ""}
                   alt={title}
                   onClick={onClick}
                   sx={{ cursor: "pointer", objectPosition: "top" }}
                 />
               </Box>
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="div"
-                sx={{ color: "teal", fontWeight: 700 }}
-              >
-                {title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {excerpt}
-              </Typography>
+              <Box sx={{ width: "50%" }}>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="div"
+                  sx={{ color: "teal", fontWeight: 700 }}
+                >
+                  {title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {excerpt}
+                </Typography>
+              </Box>
             </CardContent>
           </Box>
         </Box>
@@ -108,22 +124,12 @@ export default function BlogCard({
             {new Date(updatedDate).toLocaleDateString()}
           </div>
         </CardActions>
-        <Box>
-          <Button
-            size="small"
-            color="primary"
-            onClick={onClick}
-            sx={{ ml: "auto", color: "crimson", fontWeight: 700 }}
-          >
-            Read Full Blog
-          </Button>
-        </Box>
       </Box>
       {isMyBlogPage && (
         <Box
           sx={{
             display: "flex",
-            justifyContent: "left",
+            justifyContent: "right",
             gap: 15,
             mx: 5,
             my: 2,

@@ -37,19 +37,23 @@ export default function WritersForm({
 
   const { isPending, mutate } = useMutation({
     mutationFn: async () => {
+      const payload = {
+        title,
+        excerpt,
+        content,
+        imageUrl: uploadedImageUrl,
+      };
       if (isEdit && blogId) {
-        const response = await axios.put(
+        const response = await axios.patch(
           `${apiUrl}/blogs/${blogId}`,
-          { title, excerpt, content },
+          payload,
           { withCredentials: true },
         );
         return response.data;
       } else {
-        const response = await axios.post(
-          `${apiUrl}/blogs`,
-          { title, excerpt, content },
-          { withCredentials: true },
-        );
+        const response = await axios.post(`${apiUrl}/blogs`, payload, {
+          withCredentials: true,
+        });
         return response.data;
       }
     },
@@ -156,8 +160,8 @@ export default function WritersForm({
                   src={previewUrl}
                   alt="Preview"
                   style={{
-                    maxHeight: "100%",
-                    maxWidth: "100%",
+                    height: "200",
+                    width: "45%",
                     objectFit: "contain",
                   }}
                 />
