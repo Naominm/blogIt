@@ -27,6 +27,9 @@ export default function WritersForm({
   const [excerpt, setExcerpt] = useState(initialExcerpt || "");
   const [content, setContent] = useState(initialContent || "");
   const [formError, setFormError] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
   const navigate = useNavigate();
 
   const { isPending, mutate } = useMutation({
@@ -71,6 +74,20 @@ export default function WritersForm({
     }
     mutate();
   }
+
+  function uploadImage(files) {
+    if (files && files.length > 0) {
+      const file = files[0];
+      setImageFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+      console.log("Selected file:", files[0]);
+    }
+  }
+  function removeImage() {
+    setImageFile(null);
+    setPreviewUrl(null);
+  }
+
   return (
     <>
       <Box
@@ -106,25 +123,59 @@ export default function WritersForm({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "40%",
+              height: "300px",
               backgroundColor: "#F6F8FA",
+              border: "2px dashed #ccc",
+              borderRadius: "8px",
+              overflow: "hidden",
             }}
           >
-            <Button variant="contained">
-              <CloudUploadIcon />
-            </Button>
-            <IconButton
-              sx={{
-                position: "absolute",
-                top: 10,
-                right: 10,
-                bgcolor: "white",
-                color: "black",
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
+            {previewUrl ? (
+              <>
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  style={{
+                    maxHeight: "100%",
+                    maxWidth: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+                <IconButton
+                  onClick={removeImage}
+                  sx={{
+                    position: "absolute",
+                    top: 10,
+                    right: 10,
+                    bgcolor: "white",
+                    color: "black",
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </>
+            ) : (
+              <>
+                <input
+                  accept="image/*"
+                  type="file"
+                  id="upload-image"
+                  style={{ display: "none" }}
+                  onChange={(e) => uploadImage(e.target.files)}
+                />
+                <label htmlFor="upload-image">
+                  <Button
+                    variant="contained"
+                    component="span"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Upload Image
+                  </Button>
+                </label>
+              </>
+            )}
           </Box>
+
           <TextField
             fullWidth
             label="Enter Your title"

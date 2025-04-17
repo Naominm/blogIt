@@ -9,15 +9,25 @@ import {
 } from "@mui/material";
 import Icon from "../components/icon/Icon";
 import NavBar from "../components/NavBar";
+import apiUrl from "../utils/apiUrl";
+import { useState, useEffect } from "react";
+
 function MyProfilePage() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/users/me`)
+      .then((res) => setUser(res.data))
+      .catch((err) => console.error("Error fetching user:", err));
+  }, []);
   return (
     <Box component="div">
       <NavBar
         icon={Icon}
         menuItems={[
-          { label: "listing", path: "/explore" },
+          { label: "listing", path: "/blogs" },
           { label: "Write", path: "/writers" },
-          { label: "My Blogs", path: "/my-blogs" },
+          { label: "My Blogs", path: "/blogs/:blogId" },
           { label: "My Profile", path: "/profile" },
         ]}
         extraComponents={
