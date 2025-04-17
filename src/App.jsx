@@ -7,7 +7,7 @@ import LoginPage from "./pages/Login";
 import WritersPage from "./pages/WritePage";
 import ArticlesPage from "./pages/ArticlePage";
 import MyBlogsPage from "./pages/MyBlogs";
-import EditBlogPAge from "./pages/EditBlogPage";
+import EditBlogPage from "./pages/EditBlogPage";
 import MyProfilePage from "./pages/MyProfile";
 function App() {
   return (
@@ -53,7 +53,7 @@ function App() {
             path="/edit/:blogId"
             element={
               <Protected>
-                <EditBlogPAge />
+                <EditBlogPage />
               </Protected>
             }
           />

@@ -8,7 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import apiUrl from "../utils/apiUrl";
 
-function EditBlogPAge() {
+function EditBlogPage() {
   const { blogId } = useParams();
 
   const {
@@ -56,4 +56,4 @@ function EditBlogPAge() {
   );
 }
 
-export default EditBlogPAge;
+export default EditBlogPage;

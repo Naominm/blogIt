@@ -28,9 +28,12 @@ export default function WritersForm({
   const [content, setContent] = useState(initialContent || "");
   const [formError, setFormError] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const navigate = useNavigate();
+  const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+  const uploadUrl = import.meta.env.VITE_CLOUDINARY_UPLOAD_URL;
 
   const { isPending, mutate } = useMutation({
     mutationFn: async () => {
@@ -75,14 +78,31 @@ export default function WritersForm({
     mutate();
   }
 
-  function uploadImage(files) {
+  async function uploadImage(files) {
     if (files && files.length > 0) {
       const file = files[0];
-      setImageFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
-      console.log("Selected file:", files[0]);
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+
+      try {
+        const res = await axios.post(uploadUrl, formData);
+        const data = res.data;
+        console.log("Cloudinary upload response:", data);
+        console.log("Uploaded image URL:", data.secure_url);
+
+        setImageFile(file);
+        setPreviewUrl(URL.createObjectURL(file));
+        setUploadedImageUrl(data.secure_url);
+        console.log("Selected file:", file);
+      } catch (error) {
+        console.error("Image upload failed:", error);
+      }
     }
   }
+
   function removeImage() {
     setImageFile(null);
     setPreviewUrl(null);
