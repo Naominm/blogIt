@@ -94,7 +94,7 @@ function BlogsHero({ blogs, isLoading, error }) {
               key={blog._id}
               title={blog.title}
               excerpt={blog.excerpt}
-              featuredImage={featuredImage}
+              featuredImage={blog.imageUrl || featuredImage}
               authorAvatar={AvatarImage}
               authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
               updatedDate={new Date(blog.updatedAt).toLocaleDateString()}

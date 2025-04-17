@@ -33,7 +33,6 @@ export default function WritersForm({
     initialImageUrl || null,
   );
   const [previewUrl, setPreviewUrl] = useState(null);
-  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
   const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
