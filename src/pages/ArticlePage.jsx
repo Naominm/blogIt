@@ -69,7 +69,10 @@ function ArticlesContent({ blog }) {
         }}
       >
         <Paper elevation={0} sx={{ mt: 5, width: "60%", height: "100%" }}>
-          <Typography variant="h3" sx={{ fontWeight: 700 }}>
+          <Typography
+            variant="h3"
+            sx={{ fontWeight: 700, textAlign: "center" }}
+          >
             {blog.title}
           </Typography>
         </Paper>
