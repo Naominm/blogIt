@@ -18,6 +18,18 @@ const useProfileStore = create(
 
       secondaryEmail: "",
       setSecondaryEmail: (email) => set({ secondaryEmail: email }),
+
+      firstName: "",
+      setFirstName: (name) => set({ firstName: name }),
+
+      lastName: "",
+      setLastName: (name) => set({ lastName: name }),
+
+      email: "",
+      setEmail: (email) => set({ email: email }),
+
+      username: "",
+      setUsername: (username) => set({ username: username }),
     }),
     {
       name: "profile-storage",
