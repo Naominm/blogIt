@@ -234,15 +234,21 @@ function PersonalInfoSec() {
     const updatedProfile = {
       firstName,
       lastName,
-      email,
-      username,
+      emailAddress: email,
+      userName: username,
     };
 
     try {
-      const response = await axios.put("/api/user/profile", updatedProfile);
-      console.log("Profile updated successfully", response.data);
+      const response = await axios.patch(
+        `${apiUrl}/users/profile`,
+        updatedProfile,
+        {
+          withCredentials: true,
+        },
+      );
+      console.log("Personal info updated", response.data);
     } catch (err) {
-      console.error("Error updating profile", err);
+      console.error("Error updating personal info:", err);
     }
   };
 
