@@ -19,7 +19,11 @@ import ReactMarkdown from "react-markdown";
 function BlogListing() {
   const navigate = useNavigate();
 
-  const { isLoading, data: blogs, error } = useQuery({
+  const {
+    isLoading,
+    data: blogs,
+    error,
+  } = useQuery({
     queryKey: ["all-blogs"],
     queryFn: async () => {
       try {
@@ -29,13 +33,13 @@ function BlogListing() {
         return response.data;
       } catch (err) {
         if (err.response && err.response.status === 404) {
-          return []; 
+          return [];
         }
         throw err;
       }
     },
   });
-  
+
   return (
     <>
       <BlogsHero blogs={blogs} isLoading={isLoading} error={error} />
@@ -93,29 +97,28 @@ function BlogsHero({ blogs, isLoading, error }) {
           ))
         ) : (
           <Box textAlign="center" mt={5}>
-          <Typography variant="h6" gutterBottom>
-            You haven't published any blogs yet.
-          </Typography>
-          <Typography variant="body2" color="textSecondary" gutterBottom>
-            Start sharing your thoughts and stories with the world!
-          </Typography>
-          <Box mt={2}>
-            <button
-              onClick={() => navigate("/writers")}
-              style={{
-                backgroundColor: "teal",
-                color: "white",
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
-            >
-              Create Your First Blog
-            </button>
+            <Typography variant="h6" gutterBottom>
+              You haven't published any blogs yet.
+            </Typography>
+            <Typography variant="body2" color="textSecondary" gutterBottom>
+              Start sharing your thoughts and stories with the world!
+            </Typography>
+            <Box mt={2}>
+              <button
+                onClick={() => navigate("/writers")}
+                style={{
+                  backgroundColor: "teal",
+                  color: "white",
+                  padding: "10px 20px",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                }}
+              >
+                Create Your First Blog
+              </button>
+            </Box>
           </Box>
-        </Box>
-        
         )}
       </Box>
       <Paper
@@ -156,9 +159,7 @@ function BlogsHero({ blogs, isLoading, error }) {
                   mb: 2,
                 }}
               >
-                <Avatar alt={firstName} src={avatarUrl}>
-                  {!avatarUrl && AvatarImage}
-                </Avatar>
+                <Avatar alt={firstName} src={avatarUrl}></Avatar>
                 <Box>
                   <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                     {blog.title}

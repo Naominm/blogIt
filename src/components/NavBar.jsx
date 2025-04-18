@@ -19,6 +19,7 @@ function NavBar({
   buttons = [],
   icon: IconComponent,
   extraComponents,
+  logout,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -53,88 +54,87 @@ function NavBar({
   });
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position=" static" sx={{ backgroundColor: "teal" }}>
-        <Container maxWidth="xl">
-          <Toolbar>
+      <AppBar position="static" sx={{ backgroundColor: "teal" }}>
+        <Container maxWidth="xl" disableGutters>
+          <Toolbar
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <Box>
-              {" "}
               <Icon />
             </Box>
+
             <Box
               sx={{
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
+                gap: "2rem",
                 flexGrow: 1,
-                display: {
-                  xs: "none",
-                  md: "flex",
-                  justifyContent: "right",
-                  gap: "2rem",
-                },
               }}
             >
-              {menuItems.length > 0 ? (
-                menuItems.map((item) => (
-                  <MenuItem
-                    component={Link}
-                    to={item.path}
-                    sx={{ color: "white" }}
-                    key={item.label}
-                  >
-                    {item.label}
-                  </MenuItem>
-                ))
-              ) : (
-                <></>
-              )}
+              {menuItems.map((item) => (
+                <MenuItem
+                  component={Link}
+                  to={item.path}
+                  sx={{ color: "white" }}
+                  key={item.label}
+                >
+                  {item.label}
+                </MenuItem>
+              ))}
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none " } }}>
+
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
-                aria-label="Account of the current user"
-                aria-controls="menu-appBar"
+                aria-label="menu"
+                aria-controls="menu-appbar"
                 aria-haspopup="true"
-                color="inherit"
                 onClick={handleMenuOpen}
+                color="inherit"
               >
                 <MenuIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                transformOrigin={{ vertical: "top", horizontal: "left" }}
                 open={isMenuOpen}
                 onClose={handleMenuClose}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-                Paper={{
-                  sx: {
-                    backgroundColor: "white",
-                    color: "black",
-                  },
+                sx={{ display: { xs: "block", md: "none" } }}
+                PaperProps={{
+                  sx: { backgroundColor: "white", color: "black" },
                 }}
               >
-                {menuItems.length > 0 &&
-                  menuItems.map((item) => (
-                    <MenuItem
-                      key={item.label}
-                      component={Link}
-                      to={item.path}
-                      onClick={handleMenuClose}
-                      sx={{ color: "black" }}
-                    >
-                      {item.label}
-                    </MenuItem>
-                  ))}
+                {menuItems.map((item) => (
+                  <MenuItem
+                    key={item.label}
+                    component={Link}
+                    to={item.path}
+                    onClick={handleMenuClose}
+                    sx={{ color: "black" }}
+                  >
+                    {item.label}
+                  </MenuItem>
+                ))}
+                {logout && (
+                  <MenuItem
+                    onClick={() => {
+                      handleMenuClose();
+                      logout();
+                    }}
+                    sx={{ color: "black" }}
+                  >
+                    Logout
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
+
             {extraComponents && (
               <Box
                 sx={{

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useProfileStore from "../../store/userProfileStore";
-import AvatarImage from "../assets/blog.png"
+import AvatarImage from "../assets/blog.png";
 
 export default function BlogCard({
   title,

@@ -111,7 +111,7 @@ function ProfileInfoCard() {
   return (
     <Paper sx={{ p: 3, mb: 4 }}>
       <Typography variant="h6" mb={2}>
-        welcome {username}
+        welcome
       </Typography>
       <Box
         component="form"
