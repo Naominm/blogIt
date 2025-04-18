@@ -135,8 +135,8 @@ function SignupPage() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: { xs: "100%", md: "50%" },
-            height: { xs: "100vh", md: "80%" },
+            width: { xs: "100%", md: "80%" },
+            height: { xs: "100vh", md: "60%" },
             mt: 3,
           }}
         >

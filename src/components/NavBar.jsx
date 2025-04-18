@@ -90,7 +90,7 @@ function NavBar({
               <IconButton
                 size="large"
                 aria-label="Account of the current user"
-                aria-controls="menu-appbar"
+                aria-controls="menu-appBar"
                 aria-haspopup="true"
                 color="inherit"
                 onClick={handleMenuOpen}

@@ -10,14 +10,38 @@ import MyBlogsPage from "./pages/MyBlogs";
 import EditPage from "./pages/EditBlogPage";
 import MyProfilePage from "./pages/MyProfile";
 import MainLayout from "./components/mainLayoutNav";
+import {useNavigate} from "react-router-dom"
+import useProfileStore from "../store/userProfileStore";
+import useUserStore from "../store/userStore";
 
+
+function App() {
+const navigate=useNavigate();
 const handleLogout = () => {
-  localStorage.removeItem("authToken");
+  localStorage.removeItem("blogitAuthToken");
   sessionStorage.clear();
 
-  navigate("/");
+
+  useUserStore.persist.clearStorage();
+  useProfileStore.persist.clearStorage();
+
+  useUserStore.setState({ user: null });
+  useProfileStore.setState({
+    avatarUrl: "",
+    phoneNumber: "",
+    occupation: "",
+    bio: "",
+    secondaryEmail: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+  });
+  setTimeout(() => {
+    navigate("/auth/login");
+  }, 100);
 };
-function App() {
+
   return (
     <>
       <div className="main">

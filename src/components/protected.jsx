@@ -7,7 +7,7 @@ function Protected({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     }
   }, [user]);
   return <div>{children}</div>;

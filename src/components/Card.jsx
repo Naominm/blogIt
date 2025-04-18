@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useProfileStore from "../../store/userProfileStore";
+import AvatarImage from "../assets/blog.png"
 
 export default function BlogCard({
   title,
@@ -39,7 +40,7 @@ export default function BlogCard({
         <CardHeader
           avatar={
             <Avatar alt={firstName} src={avatarUrl}>
-              {!avatarUrl && getInitials()}
+              {!avatarUrl && ""}
             </Avatar>
           }
           title={authorName ? authorName : "Unknown Author"}
