@@ -65,12 +65,13 @@ function SignupPage() {
     <Box
       sx={{
         display: "flex",
+        flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
-        height: "100vh",
-        gap: "4rem",
+        height: { xs: "20vh", md: "100vh" },
+        gap: { xs: "1rem", md: "4rem" },
       }}
     >
-      <Box sx={{ width: "50%", height: "100%" }}>
+      <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
         <Box
           component="img"
           src={BgImage}
@@ -83,8 +84,8 @@ function SignupPage() {
         />
         <Box
           sx={{
-            height: "100%",
-            width: "50%",
+            height: { xs: "25%", md: "100%" },
+            width: { xs: "100%", md: "50%" },
             backgroundColor: "rgba(6, 69, 57, 0.8)",
             zIndex: 5,
             position: "absolute",
@@ -118,9 +119,9 @@ function SignupPage() {
               variant="h3"
               textAlign="center"
               fontWeight="700"
-              fontSize="2.5rem"
               fontFamily="Montserrat"
               color="white"
+              sx={{ fontSize: { xs: "1rem", md: "2.5rem" } }}
             >
               Join a community of writers and Readers.
             </Typography>
@@ -128,14 +129,14 @@ function SignupPage() {
         </Box>
       </Box>
 
-      <Box sx={{ width: "40%", px: 2 }}>
+      <Box sx={{ width: { xs: "100%", md: "50%" }, px: 2 }}>
         <Paper
           elevation={1}
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "100%",
-            height: "100%",
+            width: { xs: "100%", md: "50%" },
+            height: { xs: "100vh", md: "80%" },
             mt: 3,
           }}
         >

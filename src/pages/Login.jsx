@@ -66,7 +66,7 @@ function LoginPage() {
         flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
         height: { xs: "20vh", md: "100vh" },
-        gap: "4rem",
+        gap: { xs: "1rem", md: "4rem" },
       }}
     >
       <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
