@@ -3,12 +3,6 @@ import { Link } from "react-router-dom";
 
 const DefaultMenuLinks = (
   <>
-    <MenuItem component={Link} to="/" sx={{ color: "white" }}>
-      About
-    </MenuItem>
-    <MenuItem component={Link} to="/" sx={{ color: "white" }}>
-      Account
-    </MenuItem>
     <Paper sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}>
       <MenuItem
         component={Link}

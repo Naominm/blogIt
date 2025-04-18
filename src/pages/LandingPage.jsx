@@ -81,10 +81,9 @@ function LandingHero() {
             variant="subtitle"
             sx={{ fontWeight: "600", fontFamily: "Open Sans" }}
           >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, ab
-            quas eligendi quaerat amet inventore aperiam debitis necessitatibus
-            quo. Debitis dolores adipisci, omnis voluptatum explicabo magnam cum
-            odit consectetur. Numquam.
+          Welcome to BlogIt. Whether you're an experienced author or a budding writer,
+           BlogIt provides the tools to create and manage your content. Your words inspire,
+          connect, and captivate – the world is listening.
           </Typography>
           <Box sx={{ display: "flex", gap: 3 }}>
             <Button
