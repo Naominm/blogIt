@@ -49,8 +49,8 @@ export default function BlogCard({
             Width: "100%",
             height: "100%",
             display: "flex",
-            justify: "space-between",
-            mx: 4,
+            justify: "center",
+            mx: 2,
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -89,7 +89,7 @@ export default function BlogCard({
               <Box sx={{ width: { xs: "100%", md: "50%" } }}>
                 <Typography
                   gutterBottom
-                  variant="h4"
+                  variant="h6"
                   component="div"
                   sx={{ color: "teal", fontWeight: 700 }}
                 >
@@ -98,15 +98,11 @@ export default function BlogCard({
                 <Typography
                   variant="subtitle"
                   color="text.secondary"
-                  sx={{ fontWeight: "bold", mb: 5, fontFamily: "Roboto" }}
+                  sx={{ fontWeight: "bold", mb: 1, fontFamily: "Roboto" }}
                 >
                   {content}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ lineHeight: "2rem" }}
-                >
+                <Typography variant="body2" color="text.secondary">
                   {excerpt}
                 </Typography>
               </Box>
@@ -114,9 +110,7 @@ export default function BlogCard({
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{ display: "flex", justifyContent: "space-between", mx: 10, mt: 3 }}
-      >
+      <Box sx={{ display: "flex", justifyContent: "center", mx: 5, mt: 1 }}>
         <CardActions sx={{ display: "flex" }}>
           <div
             style={{
