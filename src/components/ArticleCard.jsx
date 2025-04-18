@@ -9,6 +9,7 @@ export default function ArticleCard({
   updatedDate,
   onClick,
   excerpt,
+  content,
 }) {
   return (
     <Box component="div" sx={{}}>
@@ -47,10 +48,13 @@ export default function ArticleCard({
           height="350"
           image={featuredImage || ""}
           onClick={onClick}
-          sx={{ cursor: "pointer", objectPosition: "top" }}
+          sx={{ cursor: "pointer" }}
         />
       </Box>
       <Box component="div" sx={{ mt: 2 }}>
+        <Typography variant="h6" color="text.secondary" fontSize="1rem">
+          {content}
+        </Typography>
         <Typography variant="body2" color="text.secondary" fontSize="1rem">
           {excerpt}
         </Typography>

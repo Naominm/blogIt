@@ -19,6 +19,7 @@ export default function BlogCard({
   featuredImage,
   authorAvatar,
   authorName,
+  content,
   updatedDate,
   onClick,
   edit,
@@ -56,7 +57,7 @@ export default function BlogCard({
             Width: "100%",
             height: "100%",
             display: "flex",
-            justifyContent: "space-between",
+            justify: "space-between",
             mx: 4,
           }}
         >
@@ -88,7 +89,7 @@ export default function BlogCard({
                   image={featuredImage || ""}
                   alt={title}
                   onClick={onClick}
-                  sx={{ cursor: "pointer", objectPosition: "top" }}
+                  sx={{ cursor: "pointer", borderRadius: "10px" }}
                 />
               </Box>
               <Box sx={{ width: "50%" }}>
@@ -100,7 +101,18 @@ export default function BlogCard({
                 >
                   {title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="subtitle"
+                  color="text.secondary"
+                  sx={{ fontWeight: "bold", mb: 5, fontFamily: "Roboto" }}
+                >
+                  {content}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ lineHeight: "2rem" }}
+                >
                   {excerpt}
                 </Typography>
               </Box>

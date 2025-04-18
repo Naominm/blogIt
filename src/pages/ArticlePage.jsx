@@ -1,5 +1,4 @@
 import { Typography, Paper, Box, Avatar } from "@mui/material";
-import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import NavBar from "../components/NavBar";
 import ArticleCard from "../components/ArticleCard";
@@ -79,6 +78,7 @@ function ArticlesContent({ blog }) {
         <Box component="div" sx={{ width: { xs: "100%", md: "60%" } }}>
           <ArticleCard
             title={blog.title}
+            content={blog.content}
             excerpt={blog.excerpt}
             featuredImage={blog.imageUrl}
             authorAvatar={AvatarImage}

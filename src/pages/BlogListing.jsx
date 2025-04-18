@@ -35,7 +35,6 @@ function BlogListing() {
       return response.data;
     },
   });
-
   return (
     <>
       <NavBar
@@ -65,6 +64,11 @@ function BlogListing() {
 
 function BlogsHero({ blogs, isLoading, error }) {
   const navigate = useNavigate();
+  function getExcerpt(text, maxWords = 30) {
+    const words = text.trim().split(" ");
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(" ") + "... Read More";
+  }
 
   return (
     <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
@@ -93,7 +97,7 @@ function BlogsHero({ blogs, isLoading, error }) {
             <BlogCard
               key={blog._id}
               title={blog.title}
-              excerpt={blog.excerpt}
+              excerpt={getExcerpt(blog.excerpt, 30)}
               featuredImage={blog.imageUrl || featuredImage}
               authorAvatar={AvatarImage}
               authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
@@ -124,7 +128,7 @@ function BlogsHero({ blogs, isLoading, error }) {
           }}
         >
           <Typography variant="subtitle1" sx={{ my: 1, color: "teal" }}>
-           More of this author
+            More of this author
           </Typography>
 
           {isLoading ? (
