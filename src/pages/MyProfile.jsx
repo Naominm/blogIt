@@ -44,6 +44,16 @@ function MyProfilePage() {
 
 function ProfileInfoCard() {
   const {
+    firstName,
+    lastName,
+    email,
+    username,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setUsername,
+  } = useProfileStore((state) => state);
+  const {
     avatarUrl,
     setAvatarUrl,
     phoneNumber,
@@ -117,7 +127,7 @@ function ProfileInfoCard() {
   return (
     <Paper sx={{ p: 3, mb: 4 }}>
       <Typography variant="h6" mb={2}>
-        Profile Info
+        welcome {username}
       </Typography>
       <Box
         component="form"
@@ -185,6 +195,60 @@ function ProfileInfoCard() {
 }
 
 function PersonalInfoSec() {
+  const {
+    firstName,
+    lastName,
+    email,
+    username,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setUsername,
+  } = useProfileStore((state) => state);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/profile`, {
+          withCredentials: true,
+        });
+        const data = response.data;
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
+        setEmail(data.emailAddress);
+        setUsername(data.userName);
+
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to fetch data");
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [setFirstName, setLastName, setEmail, setUsername]);
+  const handleSave = async () => {
+    const updatedProfile = {
+      firstName,
+      lastName,
+      email,
+      username,
+    };
+
+    try {
+      const response = await axios.put("/api/user/profile", updatedProfile);
+      console.log("Profile updated successfully", response.data);
+    } catch (err) {
+      console.error("Error updating profile", err);
+    }
+  };
+
+  if (loading) return <Typography>Loading...</Typography>;
+  if (error) return <Typography color="error">{error}</Typography>;
+
   return (
     <Paper sx={{ p: 3, mb: 4 }}>
       <Typography variant="h6" mb={2}>
@@ -192,19 +256,43 @@ function PersonalInfoSec() {
       </Typography>
       <Grid container columns={12} spacing={2}>
         <Grid span={{ xs: 12, md: 6 }}>
-          <TextField fullWidth label="First Name" required></TextField>
+          <TextField
+            fullWidth
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          ></TextField>
         </Grid>
         <Grid span={{ xs: 12, md: 6 }}>
-          <TextField fullWidth label="Last Name" required></TextField>
+          <TextField
+            fullWidth
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          ></TextField>
         </Grid>
         <Grid span={{ xs: 12, md: 6 }}>
-          <TextField fullWidth label="Email" required></TextField>
+          <TextField
+            fullWidth
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          ></TextField>
         </Grid>
         <Grid span={{ xs: 12, md: 6 }}>
-          <TextField fullWidth label="Username" required></TextField>
+          <TextField
+            fullWidth
+            label="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          ></TextField>
         </Grid>
       </Grid>
-      <Button variant="contained" sx={{ mt: 3 }}>
+      <Button variant="contained" sx={{ mt: 3 }} onClick={handleSave}>
         Save PErsonal Info
       </Button>
     </Paper>
