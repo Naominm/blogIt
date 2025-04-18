@@ -18,10 +18,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useProfileStore from "../../store/userProfileStore";
+import apiUrl from "../utils/apiUrl";
+import ReactMarkdown from "react-markdown";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
-import apiUrl from "../utils/apiUrl";
 
 function MyBlogsPage() {
   const queryClient = useQueryClient();
@@ -98,6 +99,11 @@ function MyBlogsPage() {
       closeDeleteDialog();
     }
   };
+  function getExcerpt(text, maxWords = 30) {
+    const words = text.trim().split(" ");
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(" ") + "... Read More";
+  }
 
   return (
     <>
@@ -134,11 +140,13 @@ function MyBlogsPage() {
                 key={blog.id}
                 blogId={blog.id}
                 title={blog.title}
-                excerpt={blog.excerpt}
+                excerpt={
+                  <ReactMarkdown>{getExcerpt(blog.excerpt, 30)}</ReactMarkdown>
+                }
+                content={<ReactMarkdown>{blog.content}</ReactMarkdown>}
                 updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
                 authorAvatar={blog.author?.avatarUrl || AvatarImage}
                 authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
-                content={blog.content}
                 featuredImage={blog.imageUrl || featuredImage}
                 remove="Delete"
                 edit="Edit"
