@@ -30,7 +30,7 @@ function EditPage() {
       <NavBar
         icon={Icon}
         menuItems={[
-          { label: "listing", path: "/explore" },
+          { label: "listing", path: "/blogs" },
           { label: "Write", path: "/writers" },
           { label: "My Blogs", path: "/blogs/:blogId" },
           { label: "My Profile", path: "/profile" },
