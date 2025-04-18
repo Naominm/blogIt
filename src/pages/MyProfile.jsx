@@ -306,17 +306,70 @@ function PersonalInfoSec() {
 }
 
 function UpdatePasswordSection() {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handlePasswordUpdate = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (newPassword !== confirmPassword) {
+      setError("New passwords do not match.");
+      return;
+    }
+
+    try {
+      const res = await axios.patch(
+        `${apiUrl}/users/password`,
+        {
+          currentPassword,
+          newPassword,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      setSuccess("Password updated successfully.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        setError(err.response.data.message || "Invalid current password.");
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
+  };
+
   return (
-    <Paper sx={{ p: 3 }} component="form">
+    <Paper sx={{ p: 3 }} component="form" onSubmit={handlePasswordUpdate}>
       <Typography variant="h6" mb={2}>
         Update password
       </Typography>
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          {success}
+        </Alert>
+      )}
+
       <Grid container spacing={2}>
         <Grid span={{ xs: 12 }}>
           <TextField
             fullWidth
             type="password"
             label="Enter your current password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
           ></TextField>
         </Grid>
         <Grid span={{ xs: 12 }}>
@@ -324,18 +377,21 @@ function UpdatePasswordSection() {
             fullWidth
             type="password"
             label="Enter your New password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
           ></TextField>
         </Grid>
-        <Grid span={{ xs: 12 }}>
+      <Grid span={{ xs: 12 }}>
           <TextField
             fullWidth
             type="password"
             label="Confirm New Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           ></TextField>
         </Grid>
       </Grid>
-      <Button variant="contained" sx={{ mt: 3 }}>
-        {" "}
+      <Button variant="contained" sx={{ mt: 3 }}type="submit">
         Update Password
       </Button>
     </Paper>
