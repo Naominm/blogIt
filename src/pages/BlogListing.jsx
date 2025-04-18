@@ -114,12 +114,52 @@ function BlogsHero({ blogs, isLoading, error }) {
           gap: 2,
         }}
       >
-        <Typography
-          variant="subtitle soon"
-          sx={{ my: 1, color: "teal", display: { xs: "none", md: "flex" } }}
+        <Paper
+          sx={{
+            mt: 10,
+            px: 5,
+            display: { xs: "none", md: "flex" },
+            flexDirection: "column",
+            gap: 2,
+          }}
         >
-          Trending Blogs will appear here soon..
-        </Typography>
+          <Typography variant="subtitle1" sx={{ my: 1, color: "teal" }}>
+           More of this author
+          </Typography>
+
+          {isLoading ? (
+            <CircularProgress />
+          ) : error ? (
+            <Alert severity="error">Error loading blogs: {error.message}</Alert>
+          ) : blogs?.length > 0 ? (
+            blogs.slice(0, 5).map((blog) => (
+              <Box
+                key={blog.id}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
+                <Avatar alt="Author Avatar" src={AvatarImage} sx={{ mr: 2 }} />
+                <Box>
+                  <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                    {blog.title}
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary">
+                    {`${blog.author?.firstName} ${blog.author?.lastName}`}
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary">
+                    {new Date(blog.updatedAt).toLocaleDateString()}
+                  </Typography>
+                </Box>
+              </Box>
+            ))
+          ) : (
+            <Typography variant="body2">No more blogs available</Typography>
+          )}
+        </Paper>
       </Paper>
     </Box>
   );

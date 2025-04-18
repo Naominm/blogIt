@@ -331,7 +331,7 @@ function UpdatePasswordSection() {
         },
         {
           withCredentials: true,
-        }
+        },
       );
       setSuccess("Password updated successfully.");
       setCurrentPassword("");
@@ -381,7 +381,7 @@ function UpdatePasswordSection() {
             onChange={(e) => setNewPassword(e.target.value)}
           ></TextField>
         </Grid>
-      <Grid span={{ xs: 12 }}>
+        <Grid span={{ xs: 12 }}>
           <TextField
             fullWidth
             type="password"
@@ -391,7 +391,7 @@ function UpdatePasswordSection() {
           ></TextField>
         </Grid>
       </Grid>
-      <Button variant="contained" sx={{ mt: 3 }}type="submit">
+      <Button variant="contained" sx={{ mt: 3 }} type="submit">
         Update Password
       </Button>
     </Paper>
