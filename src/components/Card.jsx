@@ -65,6 +65,8 @@ export default function BlogCard({
             <CardContent
               sx={{
                 display: "flex",
+                gap: { xs: "2rem", md: "none" },
+                flexDirection: { xs: "column", md: "row" },
                 alignItems: "center",
                 justifyContent: "space-between",
                 cursor: "pointer",
@@ -79,7 +81,7 @@ export default function BlogCard({
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  width: "40%",
+                  width: { xs: "100%", md: "40%" },
                 }}
               >
                 <CardMedia
@@ -92,7 +94,7 @@ export default function BlogCard({
                   sx={{ cursor: "pointer", borderRadius: "10px" }}
                 />
               </Box>
-              <Box sx={{ width: "50%" }}>
+              <Box sx={{ width: { xs: "100%", md: "50%" } }}>
                 <Typography
                   gutterBottom
                   variant="h4"

@@ -1,4 +1,4 @@
-import {Box } from "@mui/material";
+import { Box } from "@mui/material";
 import WritersForm from "../components/WritersCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";

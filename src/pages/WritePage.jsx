@@ -1,5 +1,5 @@
 import WritersForm from "../components/WritersCard";
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
 function WritersPage() {
   return (
     <>
