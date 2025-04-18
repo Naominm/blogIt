@@ -14,6 +14,7 @@ import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
 import apiUrl from "../utils/apiUrl";
 import useProfileStore from "../../store/userProfileStore";
+import ReactMarkdown from "react-markdown";
 
 function BlogListing() {
   const navigate = useNavigate();
@@ -75,7 +76,10 @@ function BlogsHero({ blogs, isLoading, error }) {
             <BlogCard
               key={blog._id}
               title={blog.title}
-              excerpt={getExcerpt(blog.excerpt, 30)}
+              excerpt={
+                <ReactMarkdown>{getExcerpt(blog.excerpt, 30)}</ReactMarkdown>
+              }
+              content={<ReactMarkdown>{blog.content}</ReactMarkdown>}
               featuredImage={blog.imageUrl || featuredImage}
               authorAvatar={blog.author?.avatarUrl || AvatarImage}
               authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
