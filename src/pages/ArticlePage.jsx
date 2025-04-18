@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrl from "../utils/apiUrl";
 import useProfileStore from "../../store/userProfileStore";
+import ReactMarkdown from "react-markdown";
 
 function ArticlesPage() {
   const { blogId } = useParams();
@@ -64,8 +65,8 @@ function ArticlesContent({ blog }) {
         <Box component="div" sx={{ width: { xs: "100%", md: "60%" } }}>
           <ArticleCard
             title={blog.title}
-            content={blog.content}
-            excerpt={blog.excerpt}
+            excerpt={<ReactMarkdown>{blog.excerpt}</ReactMarkdown>}
+            content={<ReactMarkdown>{blog.content}</ReactMarkdown>}
             featuredImage={blog.imageUrl}
             authorAvatar={avatarUrl || AvatarImage}
             authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}

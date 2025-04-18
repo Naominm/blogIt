@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrl from "../utils/apiUrl";
+import ReactMarkdown from "react-markdown";
 
 export default function WritersForm({
   initialTitle,
@@ -211,6 +212,7 @@ export default function WritersForm({
           />
           <TextField
             fullWidth
+            component="div"
             label="Enter Your subHeadline"
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -218,6 +220,7 @@ export default function WritersForm({
           />
           <TextField
             label="Blog Content"
+            component="div"
             value={excerpt}
             onChange={(e) => setExcerpt(e.target.value)}
             multiline
