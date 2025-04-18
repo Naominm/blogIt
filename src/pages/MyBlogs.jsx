@@ -17,8 +17,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
-import Icon from "../components/icon/Icon";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
@@ -100,17 +98,6 @@ function MyBlogsPage() {
 
   return (
     <>
-      <NavBar
-        icon={Icon}
-        menuItems={[
-          { label: "listing", path: "/blogs" },
-          { label: "Write", path: "/writers" },
-          { label: "My Blogs", path: "/blogs/:blogId" },
-          { label: "My Profile", path: "/profile" },
-        ]}
-        extraComponents={<Avatar alt="Naomi" src="/avatar.png" />}
-      />
-
       <Paper
         sx={{
           display: "flex",

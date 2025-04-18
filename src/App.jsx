@@ -9,6 +9,14 @@ import ArticlesPage from "./pages/ArticlePage";
 import MyBlogsPage from "./pages/MyBlogs";
 import EditPage from "./pages/EditBlogPage";
 import MyProfilePage from "./pages/MyProfile";
+import MainLayout from "./components/mainLayoutNav";
+
+const handleLogout = () => {
+  localStorage.removeItem("authToken");
+  sessionStorage.clear();
+
+  navigate("/");
+};
 function App() {
   return (
     <>
@@ -17,54 +25,21 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/auth/register" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
+
           <Route
-            path="/blogs"
             element={
               <Protected>
-                <BlogListing />
+                <MainLayout logout={handleLogout} />
               </Protected>
             }
-          />
-          <Route
-            path="/writers"
-            element={
-              <Protected>
-                <WritersPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/articles/:blogId"
-            element={
-              <Protected>
-                <ArticlesPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/blogs/:blogId"
-            element={
-              <Protected>
-                <MyBlogsPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/edit/:blogId"
-            element={
-              <Protected>
-                <EditPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <Protected>
-                <MyProfilePage />
-              </Protected>
-            }
-          />
+          >
+            <Route path="/blogs" element={<BlogListing />} />
+            <Route path="/writers" element={<WritersPage />} />
+            <Route path="/articles/:blogId" element={<ArticlesPage />} />
+            <Route path="/blogs/:blogId" element={<MyBlogsPage />} />
+            <Route path="/edit/:blogId" element={<EditPage />} />
+            <Route path="/profile" element={<MyProfilePage />} />
+          </Route>
         </Routes>
       </div>
     </>

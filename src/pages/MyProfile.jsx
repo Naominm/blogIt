@@ -9,8 +9,6 @@ import {
   Alert,
   Collapse,
 } from "@mui/material";
-import Icon from "../components/icon/Icon";
-import NavBar from "../components/NavBar";
 import apiUrl from "../utils/apiUrl";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -19,20 +17,6 @@ import useProfileStore from "../../store/userProfileStore";
 function MyProfilePage() {
   return (
     <Box component="div">
-      <NavBar
-        icon={Icon}
-        menuItems={[
-          { label: "listing", path: "/blogs" },
-          { label: "Write", path: "/writers" },
-          { label: "My Blogs", path: "/blogs/:blogId" },
-          { label: "My Profile", path: "/profile" },
-        ]}
-        extraComponents={
-          <>
-            <Avatar alt="Naomi" src="/avatar.png" />
-          </>
-        }
-      />
       <Box>
         <ProfileInfoCard />
         <PersonalInfoSec />

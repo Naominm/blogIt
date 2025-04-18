@@ -114,19 +114,25 @@ function NavBar({
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
-                PaperProps={{
+                Paper={{
                   sx: {
                     backgroundColor: "white",
                     color: "black",
                   },
                 }}
               >
-                <MenuItem component={Link} to="/" sx={{ color: "black" }}>
-                  About
-                </MenuItem>
-                <MenuItem component={Link} to="/" sx={{ color: "black" }}>
-                  Account
-                </MenuItem>
+                {menuItems.length > 0 &&
+                  menuItems.map((item) => (
+                    <MenuItem
+                      key={item.label}
+                      component={Link}
+                      to={item.path}
+                      onClick={handleMenuClose}
+                      sx={{ color: "black" }}
+                    >
+                      {item.label}
+                    </MenuItem>
+                  ))}
               </Menu>
             </Box>
             {extraComponents && (

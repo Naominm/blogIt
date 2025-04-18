@@ -37,26 +37,6 @@ function BlogListing() {
   });
   return (
     <>
-      <NavBar
-        icon={Icon}
-        menuItems={[
-          { label: "listing", path: "/blogs" },
-          { label: "Write", path: "/writers" },
-          { label: "My Blogs", path: "/blogs/:blogId" },
-          { label: "My Profile", path: "/profile" },
-        ]}
-        extraComponents={
-          <>
-            <button
-              onClick={logout}
-              style={{ fontWeight: "bold", color: "crimson", padding: 5 }}
-            >
-              Logout
-            </button>
-            <Avatar alt="Naomi" src="/avatar.png" />
-          </>
-        }
-      />
       <BlogsHero blogs={blogs} isLoading={isLoading} error={error} />
     </>
   );

@@ -1,6 +1,5 @@
 import { Typography, Paper, Box, Avatar } from "@mui/material";
 import AvatarImage from "../assets/blog.png";
-import NavBar from "../components/NavBar";
 import ArticleCard from "../components/ArticleCard";
 import Icon from "../components/icon/Icon";
 import { useParams } from "react-router-dom";
@@ -32,21 +31,6 @@ function ArticlesPage() {
 
   return (
     <>
-      <NavBar
-        icon={Icon}
-        menuItems={[
-          { label: "listing", path: "/blogs" },
-          { label: "Write", path: "/writers" },
-          { label: "My Blogs", path: "/blogs/blogsId" },
-          { label: "My Profile", path: "/profile" },
-          { label: "Articles", path: "/articles" },
-        ]}
-        extraComponents={
-          <>
-            <Avatar alt="Naomi" src="/avatar.png" />
-          </>
-        }
-      />
       <ArticlesContent blog={blog} />
     </>
   );
