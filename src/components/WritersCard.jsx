@@ -113,6 +113,7 @@ export default function WritersForm({
   function removeImage() {
     setImageFile(null);
     setPreviewUrl(null);
+    setUploadedImageUrl(null);
   }
 
   return (
@@ -157,17 +158,18 @@ export default function WritersForm({
               overflow: "hidden",
             }}
           >
-            {previewUrl ? (
+            {previewUrl || uploadedImageUrl ? (
               <>
                 <img
-                  src={previewUrl}
+                  src={previewUrl || uploadedImageUrl}
                   alt="Preview"
                   style={{
-                    height: "200",
+                    height: 200,
                     width: "45%",
                     objectFit: "contain",
                   }}
                 />
+
                 <IconButton
                   onClick={removeImage}
                   sx={{
