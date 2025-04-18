@@ -6,15 +6,17 @@ import {
   TextField,
   Button,
   Box,
+  Alert,
+  Collapse,
 } from "@mui/material";
 import Icon from "../components/icon/Icon";
 import NavBar from "../components/NavBar";
 import apiUrl from "../utils/apiUrl";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useProfileStore from "../../store/userProfileStore";
 
 function MyProfilePage() {
-  const [user, setUser] = useState(null);
   return (
     <Box component="div">
       <NavBar
@@ -41,13 +43,20 @@ function MyProfilePage() {
 }
 
 function ProfileInfoCard() {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [bio, setBio] = useState("");
-  const [secondaryEmail, setSecondaryEmail] = useState("");
-  const [avatarFile, setAvatarFile] = useState(null);
+  const {
+    avatarUrl,
+    setAvatarUrl,
+    phoneNumber,
+    setPhoneNumber,
+    occupation,
+    setOccupation,
+    bio,
+    setBio,
+    secondaryEmail,
+    setSecondaryEmail,
+  } = useProfileStore();
   const [avatarPreview, setAvatarPreview] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
   const uploadUrl = import.meta.env.VITE_CLOUDINARY_UPLOAD_URL;
@@ -87,6 +96,8 @@ function ProfileInfoCard() {
       );
 
       console.log("Profile information updated successfully", response.data);
+      setShowSuccessAlert(true);
+      setTimeout(() => setShowSuccessAlert(false), 3000);
     } catch (error) {
       console.error("Error updating profile info:", error);
 
