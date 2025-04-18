@@ -1,11 +1,11 @@
 import { Typography, Paper, Box, Avatar } from "@mui/material";
 import AvatarImage from "../assets/blog.png";
 import ArticleCard from "../components/ArticleCard";
-import Icon from "../components/icon/Icon";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrl from "../utils/apiUrl";
+import useProfileStore from "../../store/userProfileStore";
 
 function ArticlesPage() {
   const { blogId } = useParams();
@@ -37,6 +37,8 @@ function ArticlesPage() {
 }
 
 function ArticlesContent({ blog }) {
+  const firstName = useProfileStore((state) => state.firstName);
+  const avatarUrl = useProfileStore((state) => state.avatarUrl);
   return (
     <>
       <Box
@@ -65,7 +67,7 @@ function ArticlesContent({ blog }) {
             content={blog.content}
             excerpt={blog.excerpt}
             featuredImage={blog.imageUrl}
-            authorAvatar={AvatarImage}
+            authorAvatar={avatarUrl || AvatarImage}
             authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
             updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
           />

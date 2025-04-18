@@ -9,17 +9,13 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Icon from "../components/icon/Icon";
-import NavBar from "../components/NavBar";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
-import FeaturedBlogs from "../components/TrendingBlogs";
-import { useLogout } from "../components/logout";
 import apiUrl from "../utils/apiUrl";
+import useProfileStore from "../../store/userProfileStore";
 
 function BlogListing() {
-  const logout = useLogout();
   const navigate = useNavigate();
 
   const {
@@ -43,6 +39,8 @@ function BlogListing() {
 }
 
 function BlogsHero({ blogs, isLoading, error }) {
+  const firstName = useProfileStore((state) => state.firstName);
+  const avatarUrl = useProfileStore((state) => state.avatarUrl);
   const navigate = useNavigate();
   function getExcerpt(text, maxWords = 30) {
     const words = text.trim().split(" ");
@@ -79,7 +77,7 @@ function BlogsHero({ blogs, isLoading, error }) {
               title={blog.title}
               excerpt={getExcerpt(blog.excerpt, 30)}
               featuredImage={blog.imageUrl || featuredImage}
-              authorAvatar={AvatarImage}
+              authorAvatar={blog.author?.avatarUrl || AvatarImage}
               authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
               updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
               onClick={() => navigate(`/articles/${blog.id}`)}
@@ -123,10 +121,13 @@ function BlogsHero({ blogs, isLoading, error }) {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  gap: 3,
                   mb: 2,
                 }}
               >
-                <Avatar alt="Author Avatar" src={AvatarImage} sx={{ mr: 2 }} />
+                <Avatar alt={firstName} src={avatarUrl}>
+                  {!avatarUrl && getInitials()}
+                </Avatar>
                 <Box>
                   <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                     {blog.title}

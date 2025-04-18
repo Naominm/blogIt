@@ -10,8 +10,7 @@ import {
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
-import { red } from "@mui/material/colors";
+import useProfileStore from "../../store/userProfileStore";
 
 export default function BlogCard({
   title,
@@ -32,23 +31,16 @@ export default function BlogCard({
   const handleEditClick = () => {
     navigate("/edit/:blogId");
   };
-
+  const firstName = useProfileStore((state) => state.firstName);
+  const avatarUrl = useProfileStore((state) => state.avatarUrl);
   return (
     <Card component="div">
       <Box>
         <CardHeader
           avatar={
-            authorAvatar ? (
-              <Avatar
-                src={authorAvatar}
-                alt={authorName}
-                sx={{ bgcolor: red[500] }}
-              />
-            ) : (
-              <Avatar sx={{ bgcolor: red[500] }}>
-                <PersonIcon />
-              </Avatar>
-            )
+            <Avatar alt={firstName} src={avatarUrl}>
+              {!avatarUrl && getInitials()}
+            </Avatar>
           }
           title={authorName ? authorName : "Unknown Author"}
         />

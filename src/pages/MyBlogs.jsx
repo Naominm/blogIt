@@ -17,6 +17,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import useProfileStore from "../../store/userProfileStore";
 import BlogCard from "../components/Card";
 import featuredImage from "../assets/heroh1.jpg";
 import AvatarImage from "../assets/blog.png";
@@ -28,6 +29,8 @@ function MyBlogsPage() {
   const [myBlogs, setMyBlogs] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
+  const firstName = useProfileStore((state) => state.firstName);
+  const avatarUrl = useProfileStore((state) => state.avatarUrl);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -133,7 +136,7 @@ function MyBlogsPage() {
                 title={blog.title}
                 excerpt={blog.excerpt}
                 updatedDate={new Date(blog.updatedAt).toLocaleDateString()}
-                authorAvatar={AvatarImage}
+                authorAvatar={blog.author?.avatarUrl || AvatarImage}
                 authorName={`${blog.author?.firstName} ${blog.author?.lastName}`}
                 content={blog.content}
                 featuredImage={blog.imageUrl || featuredImage}
