@@ -63,12 +63,13 @@ function LoginPage() {
     <Box
       sx={{
         display: "flex",
+        flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
-        height: "100vh",
+        height: { xs: "20vh", md: "100vh" },
         gap: "4rem",
       }}
     >
-      <Box sx={{ width: "50%", height: "100%" }}>
+      <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
         <Box
           component="img"
           src={BgImage}
@@ -81,8 +82,8 @@ function LoginPage() {
         />
         <Box
           sx={{
-            height: "100%",
-            width: "50%",
+            height: { xs: "25%", md: "100%" },
+            width: { xs: "100%", md: "50%" },
             backgroundColor: "rgba(6, 69, 57, 0.8)",
             zIndex: 5,
             position: "absolute",
@@ -90,7 +91,7 @@ function LoginPage() {
             left: 0,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
+            justifyContent: { xs: "center", md: "space-around" },
             alignItems: "center",
           }}
         >
@@ -104,7 +105,6 @@ function LoginPage() {
               color: "white",
             }}
           >
-            {" "}
             <Icon />
           </Box>
           <Box
@@ -116,9 +116,9 @@ function LoginPage() {
               variant="h3"
               textAlign="center"
               fontWeight="700"
-              fontSize="2.5rem"
               fontFamily="Montserrat"
               color="white"
+              sx={{ fontSize: { xs: "1rem", md: "2.5rem" } }}
             >
               Just one step to community of writers and Readers.
             </Typography>
@@ -131,8 +131,8 @@ function LoginPage() {
           display: "flex",
           flexDirection: "column",
           gap: "3rem",
-          width: "50%",
-          height: "80%",
+          width: { xs: "100%", md: "50%" },
+          height: { xs: "100vh", md: "80%" },
           mt: 5,
           mx: 5,
         }}
