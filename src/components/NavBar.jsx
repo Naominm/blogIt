@@ -70,7 +70,7 @@ function NavBar({
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
-                justifyContent: "flex-end",
+                justifyContent: "left",
                 gap: "2rem",
                 flexGrow: 1,
               }}
@@ -116,7 +116,7 @@ function NavBar({
                     component={Link}
                     to={item.path}
                     onClick={handleMenuClose}
-                    sx={{ color: "black" }}
+                    sx={{ color: "black", backgroundColor:"white" }}
                   >
                     {item.label}
                   </MenuItem>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const DefaultMenuLinks = (
   <>
-    <Paper sx={{ backgroundColor: "crimson", textTransform: "uppercase" }}>
+    <Paper sx={{ backgroundColor: "crimson", textTransform: "uppercase"}}>
       <MenuItem
         component={Link}
         to="/auth/login"
